@@ -87,7 +87,7 @@
                                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                                         <div class="form-outline flex-fill mb-0">
                                                             <input type="password" id="form3Example4cd" class="form-control" name="ac-repass"/>
-                                                            <label class="form-label" for="form3Example4cd">Mật khẩu</label>
+                                                            <label class="form-label" for="form3Example4cd">Nhập lại mật khẩu</label>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

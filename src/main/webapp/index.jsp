@@ -36,41 +36,39 @@
        </div>
     </div>
     <div class="body">
-        <div class="container">
-            <div class="row">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <a href="">
-                                <img class="d-block w-100" src="https://theme.hstatic.net/1000237375/1000756917/14/slider_item_6_image.jpg?v=1313" alt="First slide">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="">
-                                <img class="d-block w-100" src="https://theme.hstatic.net/1000237375/1000756917/14/slider_item_4_image.jpg?v=1313" alt="Second slide">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="">
-                                <img class="d-block w-100" src="https://theme.hstatic.net/1000237375/1000756917/14/slider_item_5_image.jpg?v=1313" alt="Third slide">
-                            </a>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <a href="">
+                        <img class="d-block w-100" src="https://theme.hstatic.net/1000237375/1000756917/14/slider_item_6_image.jpg?v=1313" alt="First slide">
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                </div>
+                <div class="carousel-item">
+                    <a href="">
+                        <img class="d-block w-100" src="https://theme.hstatic.net/1000237375/1000756917/14/slider_item_4_image.jpg?v=1313" alt="Second slide">
+                    </a>
+                </div>
+                <div class="carousel-item">
+                    <a href="">
+                        <img class="d-block w-100" src="https://theme.hstatic.net/1000237375/1000756917/14/slider_item_5_image.jpg?v=1313" alt="Third slide">
                     </a>
                 </div>
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="container">
              <div class="row">
                  <div class="container d-none w-40 h-40 position-absolute mx-auto" style=" top: 217px; ${loginmodal} ">
                      <div class="d-flex justify-content-center h-100">
@@ -117,6 +115,12 @@
                      </div>
                  </div>
              </div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-8">
+
+            </div>
         </div>
     </div>
 

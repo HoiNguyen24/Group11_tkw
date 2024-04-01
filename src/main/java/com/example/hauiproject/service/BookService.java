@@ -8,12 +8,15 @@ import java.util.List;
 
 public class BookService implements IBookService<Book>{
 
-    Connection connection;
+    Connection connection = null;
 
     {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projecthaui","root","admin");
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -38,19 +41,27 @@ public class BookService implements IBookService<Book>{
     @Override
     public void add(Book book) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO book values(name,author,category,price) (?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO book (name,author,category,price) values (?,?,?,?)");
             preparedStatement.setString(1,book.getName());
-            PreparedStatement authorStatement = connection.prepareStatement("INSERT INTO author (name) values (?)");
-            authorStatement.setString(1,book.getAuthor());
-            authorStatement.executeUpdate();
             PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT id from author where name = ?");
             preparedStatement1.setString(1,book.getAuthor());
             ResultSet id_author = preparedStatement1.executeQuery();
-            preparedStatement.setString(2,id_author.getString(1));
-            preparedStatement.setString(3,book.getCategory());
-            preparedStatement.setString(4,String.valueOf(book.getPrice()));
+            if(!id_author.next()){
+                PreparedStatement authorStatement = connection.prepareStatement("INSERT INTO author (name) values (?)");
+                authorStatement.setString(1,book.getAuthor());
+                authorStatement.executeUpdate();
+            }
+            PreparedStatement preparedStatement2 = connection.prepareStatement("SELECT id from author where name = ?");
+            preparedStatement2.setString(1,book.getAuthor());
+            ResultSet id_author1 = preparedStatement2.executeQuery();
+            if(id_author1.next()){
+                preparedStatement.setString(2,id_author.getString(1));
+                preparedStatement.setString(3,book.getCategory());
+                preparedStatement.setString(4,String.valueOf(book.getPrice()));
+                preparedStatement.executeUpdate();
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("loi o day dm");
         }
     }
 

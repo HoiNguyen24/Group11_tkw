@@ -1,10 +1,19 @@
 package com.example.hauiproject.model;
 
+import javax.management.relation.Role;
+
 public class Account {
     private String username;
     private String password;
-
     private Cart cart;
+    private String role;
+
+    public Account(String username, String password,String role) {
+        this.username = username;
+        this.role = role;
+        this.password = password;
+        cart = new Cart();
+    }
 
     public Cart getCart() {
         return cart;
@@ -14,10 +23,12 @@ public class Account {
         this.cart = cart;
     }
 
-    public Account(String username, String password) {
-        this.username = username;
-        this.password = password;
-        cart = new Cart();
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {

@@ -24,12 +24,12 @@ html,body{
 }
 
 .social_icon span:hover{
-    color: white;
+    color: black;
     cursor: pointer;
 }
 
 .card-header h3{
-    color: white;
+    color: black;
 }
 
 .social_icon{
@@ -50,7 +50,7 @@ input:focus{
 }
 
 .remember{
-    color: white;
+    color: black;
 }
 
 .remember input
@@ -73,7 +73,7 @@ input:focus{
 }
 
 .links{
-    color: white;
+    color: black;
 }
 
 .links a{
