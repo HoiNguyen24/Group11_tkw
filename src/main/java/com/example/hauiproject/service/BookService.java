@@ -3,8 +3,7 @@ package com.example.hauiproject.service;
 import com.example.hauiproject.model.Book;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class BookService implements IBookService<Book>{
 
@@ -107,5 +106,67 @@ public class BookService implements IBookService<Book>{
         }catch (Exception e){
         }
         return -1;
+    }
+    public List<Book> sortDesc(ArrayList<Book> bookList) throws Exception{
+        PostService postService = new PostService();
+        for(int  i = 0 ;  i < bookList.size();i++){
+            for(int j = 0 ; j < bookList.size()-i ; j++){
+                if(postService.getReviewCount(bookList.get(j).getId()) < postService.getReviewCount(bookList.get(j+1).getId())){
+                   Book temp = bookList.get(j);
+                   bookList.set(j,bookList.get(j+1));
+                   bookList.set(j+1,temp);
+                }
+            }
+        }
+        return (List<Book>) bookList;
+    }
+    public List<Book> sortAsc(ArrayList<Book> bookList) throws Exception{
+        PostService postService = new PostService();
+        for(int  i = 0 ;  i < bookList.size();i++){
+            for(int j = 0 ; j < bookList.size()-i ; j++){
+                if(postService.getReviewCount(bookList.get(j).getId()) < postService.getReviewCount(bookList.get(j+1).getId())){
+                    Book temp = bookList.get(j);
+                    bookList.set(j,bookList.get(j+1));
+                    bookList.set(j+1,temp);
+                }
+            }
+        }
+        return (List<Book>) bookList;
+    }
+    public List<Book> sortDesc_price() throws SQLException{
+        List<Book> bookList = new ArrayList<Book>();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from book ORDER BY price desc ");
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()){
+            bookList.add(new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),rs.getString("category"),rs.getDouble("price")));
+        }
+        return bookList;
+    }
+    public List<Book> sortAsc_price() throws SQLException{
+        List<Book> bookList = new ArrayList<Book>();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from book ORDER BY price asc ");
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()){
+            bookList.add(new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),rs.getString("category"),rs.getDouble("price")));
+        }
+        return bookList;
+    }
+    public List<Book> getBookByCategory(String category) throws SQLException{
+        List<Book> bookList = new ArrayList<Book>();
+        PreparedStatement ps = connection.prepareStatement("SELECT * from book where category = ? ");
+        ps.setString(1, category);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            bookList.add(new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),rs.getString("category"),rs.getDouble("price")));
+        }
+        return bookList;
+    }
+    public int recently() throws SQLException{
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT max(id)) FROM book");
+        if(rs.next())
+            return rs.getInt("id");
+        else
+            return -1;
     }
 }

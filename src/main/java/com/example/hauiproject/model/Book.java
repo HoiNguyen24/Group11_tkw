@@ -7,6 +7,8 @@ public class Book {
     private String category;
     private double price;
 
+    private double reviewscore;
+
     public Book(int id, String name, String author, String category, double price) {
         this.id = id;
         this.name = name;
@@ -53,5 +55,13 @@ public class Book {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getReviewscore() {
+        return reviewscore;
+    }
+
+    public void setReviewscore(double reviewscore) {
+        this.reviewscore = reviewscore;
     }
 }

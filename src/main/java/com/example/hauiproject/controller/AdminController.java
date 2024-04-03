@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Collection;
 
 @WebServlet(name = "adminController",value = "/admin")
@@ -50,8 +52,16 @@ public class AdminController extends HttpServlet {
         double price  = Double.valueOf(req.getParameter("price"));
         System.out.println(price);
         bookService.add(new Book(-1,name,author,category,price));
+        File dic = null;
+        try {
+            dic = new File("/image/"+bookService.recently());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        if(dic.exists())
+            System.out.println("created");
         Part part = req.getPart("5");
-        part.write("1.png");
+        part.write("book.png");
         System.out.println(part.getSubmittedFileName());
         String file = req.getParameter("5");
     }

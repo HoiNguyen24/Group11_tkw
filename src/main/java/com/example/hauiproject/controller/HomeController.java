@@ -42,6 +42,7 @@ public class HomeController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         switch (action){
+            case "createAccount":
 
         }
     }
@@ -50,9 +51,9 @@ public class HomeController extends HttpServlet {
         String repassword = req.getParameter("ac-repass");
         if(password.equals(repassword)){
             String username = req.getParameter("ac-username");
-
             String phonenumber = req.getParameter("ac-phonenumber");
             String name = req.getParameter("ac-name");
+
         }
         resp.sendRedirect("/home");
     }

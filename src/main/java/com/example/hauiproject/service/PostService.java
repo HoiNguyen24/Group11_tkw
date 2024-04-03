@@ -23,4 +23,17 @@ public class PostService {
         }
         return comments;
     }
+    public double getReviewCount(int bookId) throws SQLException{
+        PreparedStatement ps = connection.prepareStatement("SELECT score from review where book_id = ?", bookId);
+        ResultSet rs = ps.executeQuery();
+        int S = 0;
+        int count = 0;
+        while (rs.next()){
+            S += rs.getInt("score");
+            count++;
+        }
+        return (double) S/count;
+    }
+
+
 }
