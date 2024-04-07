@@ -6,9 +6,7 @@ public class Book {
     private String author;
     private String category;
     private double price;
-
     private double reviewscore;
-
     public Book(int id, String name, String author, String category, double price) {
         this.id = id;
         this.name = name;

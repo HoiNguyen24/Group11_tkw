@@ -1,5 +1,7 @@
 package com.example.hauiproject.controller;
 
+import com.example.hauiproject.service.CustomerService;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,6 +45,23 @@ public class HomeController extends HttpServlet {
         String action = req.getParameter("action");
         switch (action){
             case "createAccount":
+                createAccount(req, resp);
+                break;
+            case "doLogin":
+                doLogin(req,resp);
+                break;
+        }
+    }
+    public void doLogin(HttpServletRequest req, HttpServletResponse resp ) throws ServletException,IOException{
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        CustomerService customerService = new CustomerService();
+        try {
+            if(customerService.checkAccount(username,password))
+                System.out.println("ok");
+            else
+                System.out.println("khong ok");
+        }catch (Exception e){
 
         }
     }
@@ -53,7 +72,6 @@ public class HomeController extends HttpServlet {
             String username = req.getParameter("ac-username");
             String phonenumber = req.getParameter("ac-phonenumber");
             String name = req.getParameter("ac-name");
-
         }
         resp.sendRedirect("/home");
     }

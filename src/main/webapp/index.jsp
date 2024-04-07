@@ -26,7 +26,7 @@
                       <a href="" class="btn d-flex justify-content-center text-light btn-secondary rounded-circle">
                           <ion-icon name="cart-outline" style="width: 30px;height: 30px;"></ion-icon>
                       </a>
-                      <a href="http://localhost:8080/Gradle___com_example___hauiProject_1_0_SNAPSHOT_war__exploded_/home?action=login" class="btn d-flex justify-content-center text-light btn-secondary" style="height: 40px">
+                      <a href="http://localhost:8080/home?action=login" class="btn d-flex justify-content-center text-light btn-secondary" style="height: 40px">
                           <ion-icon name="person-circle-outline" style="width: 30px;height: 30px;"></ion-icon>
                           <p style="font-size: 20px" class="ml-1">Đăng nhập</p>
                       </a>
@@ -82,18 +82,18 @@
                                  </div>
                              </div>
                              <div class="card-body">
-                                 <form method="post" action="login">
+                                 <form method="post" action="http://localhost:8080/home?action=doLogin">
                                      <div class="input-group form-group">
                                          <div class="input-group-prepend">
                                              <span class="input-group-text bg-primary"><i class="fas fa-user"></i></span>
                                          </div>
-                                         <input type="text" class="form-control" placeholder="username">
+                                         <input type="text" name="username" class="form-control" placeholder="username">
                                      </div>
                                      <div class="input-group form-group">
                                          <div class="input-group-prepend">
                                              <span class="input-group-text bg-primary"><i class="fas fa-key"></i></span>
                                          </div>
-                                         <input type="password" class="form-control" placeholder="password">
+                                         <input type="password" name="password"class="form-control" placeholder="password">
                                      </div>
                                      <div class="row align-items-center remember">
                                          <input type="checkbox">Remember Me

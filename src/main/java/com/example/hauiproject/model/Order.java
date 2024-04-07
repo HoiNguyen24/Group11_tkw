@@ -7,9 +7,7 @@ public class Order {
     private int id;
     private ArrayList<Book> books;
     private Customer customer;
-
     private Date date;
-
     private double price;
 
     public Order(int id, ArrayList<Book> books, Customer customer, Date date, double price) {

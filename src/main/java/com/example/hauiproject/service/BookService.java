@@ -169,4 +169,25 @@ public class BookService implements IBookService<Book>{
         else
             return -1;
     }
+
+    public Book getBook(int id) throws SQLException{
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM book where id = ?");
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+            return new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),rs.getString("category"),rs.getDouble("price"));
+        else
+            return null;
+    }
+    public List<Book> search(String target) throws SQLException{
+        List<Book> list = new LinkedList<>();
+        PreparedStatement search = connection.prepareStatement("SELECT id from book where author = ? or category = ? or name = ? ");
+        search.setString(1,"%"+target+"%");
+        search.setString(2,"%"+target+"%");
+        search.setString(3,"%"+target+"%");
+        ResultSet rs = search.executeQuery();
+        while (rs.next()){
+            list.add(getBook(rs.getInt("id")));
+        }
+        return list;
+    }
 }

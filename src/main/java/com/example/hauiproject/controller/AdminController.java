@@ -33,10 +33,12 @@ public class AdminController extends HttpServlet {
         requestDispatcher.forward(req,resp);
     }
 
+    public void showHome() throws IOException, ServletException{
+
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
         switch (action){
             case "addBook":
                 addBook(req,resp);
