@@ -1,6 +1,7 @@
 package com.example.hauiproject.service;
 
 import com.example.hauiproject.model.Book;
+import com.example.hauiproject.model.BookOrder;
 import com.example.hauiproject.model.Order;
 
 import java.sql.Connection;
@@ -21,23 +22,27 @@ public class OrderService {
         preparedStatement.executeUpdate();
     }
     public Order getOrder(String id_order) throws SQLException {
-        List<Book> books = new ArrayList<>();
+        CustomerService customerService =new CustomerService();
+        List<BookOrder> books = new ArrayList<>();
         BookService bookService = new BookService();
         PreparedStatement ps = connection.prepareStatement("SELECT book_id,sum(quantity) as quantity FROM order_detail where order_id = ? group by book_id");
+        ps.setString(1, id_order);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            books.add(bookService.getBook(rs.getInt("book_id")));
+            books.add(new BookOrder(bookService.getBook(rs.getInt("book_id")),rs.getLong(2)));
         }
-        ps.setString(1, id_order);
-        ResultSet rs2 = ps.executeQuery();
-        return new Order (rs2.getInt(""))
+        PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM book `order` where id = ?");
+        ResultSet rs2 = ps2.executeQuery();
+        return new Order (rs2.getInt("id"),books,customerService.getCustomer(rs2.getString("customer_id")),rs.getDate("date"),rs.getDouble("price"));
     }
     public List<Order> getOrdersCustomer(String id) throws SQLException {
         PreparedStatement order_detail = connection.prepareStatement("SELECT * from order where customer_id = ?");
         order_detail.setString(1,id);
         ResultSet result = order_detail.executeQuery();
+        List<Order> orders = new ArrayList<Order>();
         while (result.next()) {
-
+                orders.add(getOrder(result.getString(1)));
         }
+        return orders;
     }
 }

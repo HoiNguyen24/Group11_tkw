@@ -2,15 +2,16 @@ package com.example.hauiproject.model;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
     private int id;
-    private ArrayList<Book> books;
+    private List<BookOrder> books;
     private Customer customer;
     private Date date;
     private double price;
 
-    public Order(int id, ArrayList<Book> books, Customer customer, Date date, double price) {
+    public Order(int id, List<BookOrder> books, Customer customer, Date date, double price) {
         this.id = id;
         this.books = books;
         this.customer = customer;
@@ -26,11 +27,11 @@ public class Order {
         this.id = id;
     }
 
-    public ArrayList<Book> getBooks() {
+    public List<BookOrder> getBooks() {
         return books;
     }
 
-    public void setBooks(ArrayList<Book> books) {
+    public void setBooks(List<BookOrder> books) {
         this.books = books;
     }
 

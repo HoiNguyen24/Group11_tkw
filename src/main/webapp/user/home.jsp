@@ -13,10 +13,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<c:url value="style.css"/>">
+    <link rel="stylesheet" href="<c:url value="/style.css"/>">
     <link
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
             rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <title>Movie Design</title>
     <style type="text/css">
@@ -76,14 +77,21 @@
             </div>
             <div class="profile-options" id="profileOptions">
                 <ul>
-                    <li><a href="http://localhost:8080/login?action=login">Đăng nhập</a></li>
+                    <li><a href="">Thông tin</a></li>
+                    <li><a href="#">Xem đơn hàng</a></li>
+                    <li><a href="">Đăng xuất</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 <div class="sidebar">
-    <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
+    <i class="left-menu-icon fas fa-search"></i>
+    <i class="left-menu-icon fas fa-home"></i>
+    <i class="left-menu-icon fas fa-users"></i>
+    <i class="left-menu-icon fas fa-bookmark"></i>
+    <i class="left-menu-icon fas fa-tv"></i>
+    <i class="left-menu-icon fas fa-hourglass-start"></i>
     <i class="left-menu-icon fas fa-shopping-cart"></i>
 </div>
 <div class="container">
