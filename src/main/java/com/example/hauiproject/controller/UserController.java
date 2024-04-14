@@ -31,9 +31,10 @@ public class UserController extends HttpServlet {
             List<Book> book1 = bookService.getBookByCategory("tn");
             List<Book> book2 = bookService.getBookByCategory("kd");
             List<Book> book3 = bookService.getBookByCategory("tk");
-            req.setAttribute("book1",book1);
-            req.setAttribute("book2",book2);
-            req.setAttribute("book3",book3);
+            req.setAttribute("books1",book1);
+            req.setAttribute("books2",book2);
+            req.setAttribute("books3",book3);
+        System.out.println(book1);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
         requestDispatcher.forward(req,resp);
     }

@@ -102,7 +102,7 @@
                         <form>
                             <div class="movie-list">
                                 <div class="movie-list-item">
-                                    <img class="movie-list-item-img" src="./image/${item.image}" alt="">
+                                    <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
                                     <span class="movie-list-item-title">${item.name}</span>
                                     <p class="movie-list-item-desc">${item.author} </p>
                                     <button class="movie-list-item-button" >

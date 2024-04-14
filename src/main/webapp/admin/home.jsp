@@ -123,10 +123,14 @@
           <div class="row">
             <div class="col-6"></div>
             <div class="col-3">
-              <a href="#" class="btn btn-primary">Sửa</a>
+              <form action="http://localhost:8080/admin?action=edit&id=${item.id}" method="get">
+                <button class="btn btn-primary">Sửa</button>
+              </form>
             </div>
             <div class="col-3">
-              <a href="#" class="btn btn-danger">Xóa</a>
+              <form action="http://localhost:8080/admin?action=delete&id=${item.id}" method="post">
+                <button class="btn btn-danger">Xóa</button>
+              </form>
             </div>
           </div>
         </div>

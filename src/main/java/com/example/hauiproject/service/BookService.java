@@ -176,12 +176,13 @@ public class BookService implements IBookService<Book>{
             }
             return books;
         }catch (SQLException e){
-
+                e.printStackTrace();
         }
         return null;
     }
     public Book getBook(int id) throws SQLException{
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM book where id = ?");
+        ps.setString(1,String.valueOf(id));
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
             String category = new String();
