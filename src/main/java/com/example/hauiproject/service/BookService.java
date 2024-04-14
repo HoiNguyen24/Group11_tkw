@@ -173,8 +173,36 @@ public class BookService implements IBookService<Book>{
     public Book getBook(int id) throws SQLException{
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM book where id = ?");
         ResultSet rs = ps.executeQuery();
-        if(rs.next())
-            return new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),rs.getString("category"),rs.getDouble("price"));
+        if(rs.next()){
+            String category = new String();
+            switch (rs.getString("category")){
+                case "mn":
+                    category ="SÁCH MẦM NON";
+                    break;
+                case "tn":
+                    category = "SÁCH THIẾU NHI";
+                    break;
+                case "kn":
+                    category = "SÁCH KĨ NĂNG";
+                    break;
+                case "kd":
+                    category = "SÁCH KINH DOANH";
+                    break;
+                case"mb":
+                    category = "SÁCH MẸ VÀ BÉ";
+                    break;
+                case "vh":
+                    category = "SÁCH VĂN HỌC";
+                    break;
+                case"tk":
+                    category = "SÁCH THAM KHẢO";
+                    break;
+                case"nb":
+                    category = "NOTEBOOK";
+                    break;
+            }
+            return new Book(rs.getInt("id"),rs.getString("name"),category,rs.getString("category"),rs.getDouble("price"));
+        }
         else
             return null;
     }
@@ -189,5 +217,17 @@ public class BookService implements IBookService<Book>{
             list.add(getBook(rs.getInt("id")));
         }
         return list;
+    }
+    public int getRecently(){
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT max(id) FROM book");
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        }catch(SQLException e){
+
+        }
+        return -1;
     }
 }
