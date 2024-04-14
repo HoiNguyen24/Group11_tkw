@@ -20,7 +20,7 @@ import java.util.List;
 
 @WebServlet(name = "adminController",value = "/admin")
 @MultipartConfig(
-        location = "C:\\Users\\Admin\\IdeaProjects\\hauiProject\\image",
+        location = "C:\\Users\\Admin\\IdeaProjects\\hauiProject\\src\\main\\webapp\\image1",
         fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 10
 )
@@ -43,6 +43,7 @@ public class AdminController extends HttpServlet {
 
     public void showHome(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{
                List<Book> books = bookService.findall();
+              System.out.println(books);
                req.setAttribute("books", books);
                RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/home.jsp");
                requestDispatcher.forward(req, resp);
@@ -55,7 +56,7 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         switch (action){
-            case "addBook":
+            case "add":
                 addBook(req,resp);
                 break;
             case "delete":
@@ -69,14 +70,19 @@ public class AdminController extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         bookService.delete(id);
     }
-    public void addBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    public void addBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
         String name = req.getParameter("name");
         String author = req.getParameter("author");
         String category = req.getParameter("category");
         double price  = Double.valueOf(req.getParameter("price"));
         System.out.println(price);
         bookService.add(new Book(-1,name,author,category,price));
-        Part part = req.getPart("5");
-        part.write(bookService.getRecently()+".png");
+       try {
+           Part part = req.getPart("image");
+           part.write(bookService.getRecently()+".png");
+           resp.sendRedirect("http://localhost:8080/admin?action=home");
+       }catch (IOException e){
+           e.printStackTrace();
+       }
     }
 }

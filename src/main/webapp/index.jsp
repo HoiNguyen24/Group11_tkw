@@ -89,11 +89,11 @@
 <div class="container">
     <div class="content-container">
         <div class="featured-content"
-             style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('https://i.pinimg.com/originals/95/33/53/953353b45e969203fb97d4736f756e53.jpg');">
-            <p class="featured-desc" style="font-size: 50px;">Nhà sách uy tín số một Bắc Giang</p>
+             style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('https://top1danhgia.com/uploads/2022/nha-sach-nha-nam-1.jpg');">
+            <p class="featured-desc" style="font-size: 50px;">NHÀ SÁCH DƯƠNG TÂM - Nhà sách uy tín số một Bắc Giang</p>
         </div>
         <div class="movie-list-container">
-            <h1 class="movie-list-title">Sách cho thiếu nhi</h1>
+            <h1 class="movie-list-title">Sách thiếu nhi</h1>
             <div class="movie-list-wrapper">
                 <div class="movie-list">
                     <c:forEach var="item" items="${books1}">
@@ -118,7 +118,7 @@
             </div>
         </div>
         <div class="movie-list-container">
-            <h1 class="movie-list-title">Sách tài sửu</h1>
+            <h1 class="movie-list-title">Sách kinh doanh</h1>
             <div class="movie-list-wrapper">
                 <div class="movie-list">
                     <c:forEach var="item" items="${books2}">
@@ -143,7 +143,7 @@
             </div>
         </div>
         <div class="movie-list-container">
-            <h1 class="movie-list-title">Sách làm giàu</h1>
+            <h1 class="movie-list-title">Sách tham khảo</h1>
             <div class="movie-list-wrapper">
                 <div class="movie-list">
                     <c:forEach var="item" items="${books3}">

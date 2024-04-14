@@ -40,6 +40,7 @@ public class BookService implements IBookService<Book>{
     @Override
     public void add(Book book) {
         try {
+            System.out.println(book);
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO book (name,author,category,price) values (?,?,?,?)");
             preparedStatement.setString(1,book.getName());
             PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT id from author where name = ?");
@@ -54,13 +55,13 @@ public class BookService implements IBookService<Book>{
             preparedStatement2.setString(1,book.getAuthor());
             ResultSet id_author1 = preparedStatement2.executeQuery();
             if(id_author1.next()){
-                preparedStatement.setString(2,id_author.getString(1));
+                preparedStatement.setString(2,id_author1.getString("id"));
                 preparedStatement.setString(3,book.getCategory());
                 preparedStatement.setString(4,String.valueOf(book.getPrice()));
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println("loi o day dm");
+            e.printStackTrace();
         }
     }
 
@@ -69,15 +70,16 @@ public class BookService implements IBookService<Book>{
         List<Book> books_list = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet books = statement.executeQuery("SELECT * from book");
-            PreparedStatement author = connection.prepareStatement("SELECT name from author where id = ?");
+            ResultSet books = statement.executeQuery("SELECT b.id,b.name,a.name as author,b.category,b.price from book b join author a on a.id = b.author ");
             while (books.next()){
-                  author.setString(1,books.getString(3));
-                  ResultSet author_rs = author.executeQuery();
-                  books_list.add(new Book(books.getInt(1),books.getString(2),author_rs.getString(3),books.getString(4),books.getDouble(5)));
+                  books_list.add(new Book(books.getInt(1),books.getString(2),books.getString(3),books.getString(4),books.getDouble(5)));
             }
-        }catch (Exception e){
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        for (int  i = 0 ; i < books_list.size();i++){
+            books_list.get(i).setImage(books_list.get(i).getId()+".png");
         }
         return books_list;
     }
@@ -151,16 +153,6 @@ public class BookService implements IBookService<Book>{
         }
         return bookList;
     }
-    public List<Book> getBookByCategory(String category) throws SQLException{
-        List<Book> bookList = new ArrayList<Book>();
-        PreparedStatement ps = connection.prepareStatement("SELECT * from book where category = ? ");
-        ps.setString(1, category);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            bookList.add(new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),rs.getString("category"),rs.getDouble("price")));
-        }
-        return bookList;
-    }
     public int recently() throws SQLException{
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("SELECT max(id)) FROM book");
@@ -170,6 +162,24 @@ public class BookService implements IBookService<Book>{
             return -1;
     }
 
+    public List<Book> getBookByCategory(String category){
+        try {
+            List<Book> books = new LinkedList<>();
+            PreparedStatement ps = connection.prepareStatement("SELECT id from book where category = ?");
+            ps.setString(1,category);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                   books.add(getBook(rs.getInt(1)));
+            }
+            for (int  i = 0 ; i < books.size();i++){
+                books.get(i).setImage(books.get(i).getId()+".png");
+            }
+            return books;
+        }catch (SQLException e){
+
+        }
+        return null;
+    }
     public Book getBook(int id) throws SQLException{
         PreparedStatement ps = connection.prepareStatement("SELECT * FROM book where id = ?");
         ResultSet rs = ps.executeQuery();

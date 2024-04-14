@@ -53,4 +53,21 @@ public class CustomerService {
               return null;
           }
 
+          public boolean getRole(String id){
+              try {
+                  PreparedStatement preparedStatement = connection.prepareStatement("SELECT role from account where id = ?");
+                  preparedStatement.setString(1,id);
+                  ResultSet rs = preparedStatement.executeQuery();
+                  if(rs.next()){
+                      if(rs.getString(1).equals("admin"))
+                          return true;
+                      else
+                          return false;
+                  }
+              }catch (SQLException e){
+
+              }
+              return false;
+          }
+
 }

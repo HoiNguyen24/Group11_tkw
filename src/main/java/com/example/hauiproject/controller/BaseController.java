@@ -58,7 +58,6 @@ public class BaseController extends HttpServlet {
 
     private void register(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
     }
 
     public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
@@ -66,10 +65,15 @@ public class BaseController extends HttpServlet {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             int i = customerService.checkAccount(username, password);
-            if(i == -1){
+            System.out.println(i);
+            if(i != -1){
                 HttpSession session = req.getSession();
                 session.setAttribute("accountId",i);
-                resp.sendRedirect("index.jsp");
+                if(customerService.getRole(String.valueOf(i)))
+                    resp.sendRedirect("http://localhost:8080/admin?action=home");
+                else
+                    resp.sendRedirect("http://localhost:8080/user?action=home");
+
             }else{
                 resp.sendRedirect("http://localhost:8080/login?action=login");
             }

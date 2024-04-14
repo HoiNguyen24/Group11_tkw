@@ -109,12 +109,12 @@
                             <p class="text-white-50 mb-5">Phiền bạn nhập mật khẩu và tài khoản</p>
 
                             <div data-mdb-input-init class="form-outline form-white mb-4">
-                                <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                                <input type="text" id="typeEmailX" class="form-control form-control-lg" name="username"/>
                                 <label class="form-label" for="typeEmailX">Tài khoản</label>
                             </div>
 
                             <div data-mdb-input-init class="form-outline form-white mb-4">
-                                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                                <input type="password" id="typePasswordX" class="form-control form-control-lg" name="password" />
                                 <label class="form-label" for="typePasswordX">Mật khẩu</label>
                             </div>
 

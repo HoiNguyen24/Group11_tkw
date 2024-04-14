@@ -109,7 +109,7 @@
       <div class="row">
           <div class="col-3"></div>
           <div class="col-6">
-              <form action="" method="post" enctype="multipart/form-data">
+              <form action="http://localhost:8080/admin?action=add" method="post" enctype="multipart/form-data">
                   <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0" style="width: 100%">
                           <input type="text" id="1" name="name" class="form-control" name="ac-name"/>

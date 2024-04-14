@@ -78,6 +78,14 @@
         background: blueviolet;
         color: burlywood;
     }
+    .card-book {
+      height: 20%;
+      width: 20%;
+      min-height: 20%;
+      max-width: 20%;
+      min-width: 20%;
+      margin: 10px;
+    }
   </style>
 </head>
 
@@ -102,13 +110,13 @@
   </div>
 </div>
 <div class="sidebar">
-  <i class="left-menu-icon fas fa-solid fa-book"></i>
+  <a href="http://localhost:8080/admin?action=add"> <i class="left-menu-icon fas fa-solid fa-book"></i></a>
   <i class="left-menu-icon fas fa-solid fa-truck"></i>
 </div>
-<div class="container gradient-custom mt-5">
+<div class="container gradient-custom mt-5 d-flex flex-wrap">
     <c:forEach var="item" items="${books}">
-      <div class="card" style="width: 18rem;">
-        <img src="../image/${item.image}" class="card-img-top" alt="...">
+      <div class="card card-book">
+        <img src="./image1/${item.image}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${item.name}</h5>
           <p class="card-text">${item.category}</p>
@@ -124,21 +132,6 @@
         </div>
       </div>
     </c:forEach>
-  <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <div class="row">
-        <div class="col-6"></div>
-        <div class="col-3">
-          <a href="#" class="btn btn-primary">Sửa</a>
-        </div>
-        <div class="col-3">
-          <a href="#" class="btn btn-danger">Xóa</a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 <script src="app.js"></script>

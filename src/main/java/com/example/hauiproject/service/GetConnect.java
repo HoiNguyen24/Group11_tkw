@@ -13,7 +13,7 @@ public class GetConnect {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             throw new RuntimeException(e);
