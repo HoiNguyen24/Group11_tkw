@@ -101,19 +101,45 @@
     </div>
   </div>
 </div>
-<div class="row function">
-  <nav class="nav nav-pills nav-justified">
-    <a class="nav-item nav-link " href="#">Thêm sách</a>
-    <a class="nav-item nav-link " href="#">Xem đơn hàng</a>
-    <a class="nav-item nav-link " href="#">Nhật Trung</a>
-    <a class="nav-item nav-link " href="#">Đức Doanh</a>
-  </nav>
-</div>
 <div class="sidebar">
   <i class="left-menu-icon fas fa-solid fa-book"></i>
   <i class="left-menu-icon fas fa-solid fa-truck"></i>
 </div>
-<div class="container gradient-custom">
+<div class="container gradient-custom mt-5">
+    <c:forEach var="item" items="${books}">
+      <div class="card" style="width: 18rem;">
+        <img src="../image/${item.image}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${item.name}</h5>
+          <p class="card-text">${item.category}</p>
+          <div class="row">
+            <div class="col-6"></div>
+            <div class="col-3">
+              <a href="#" class="btn btn-primary">Sửa</a>
+            </div>
+            <div class="col-3">
+              <a href="#" class="btn btn-danger">Xóa</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </c:forEach>
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-3">
+          <a href="#" class="btn btn-primary">Sửa</a>
+        </div>
+        <div class="col-3">
+          <a href="#" class="btn btn-danger">Xóa</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="app.js"></script>
 <script type="text/javascript">

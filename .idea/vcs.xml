@@ -4,6 +4,5 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Marketplace" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ludus-free-premium-ecommerce-template" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/startbootstrap-sb-admin-2" vcs="Git" />
   </component>
 </project>
