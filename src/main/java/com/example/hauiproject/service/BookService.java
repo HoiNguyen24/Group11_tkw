@@ -9,6 +9,8 @@ public class BookService implements IBookService<Book>{
 
     Connection connection = null;
 
+    PostService postService = new PostService();
+
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -80,13 +82,28 @@ public class BookService implements IBookService<Book>{
         }
         for (int  i = 0 ; i < books_list.size();i++){
             books_list.get(i).setImage(books_list.get(i).getId()+".png");
+            try {
+                books_list.get(i).setReviewscore(postService.getReviewCount(books_list.get(i).getId()));
+            }catch (SQLException e){
+
+            }
         }
         return books_list;
     }
 
     @Override
     public void edit(int index, Book book) {
+           try {
+               PreparedStatement preparedStatement = connection.prepareStatement("UPDATE book SET name = ?,author = ?,category = ?,price= ? where id = ?");
+               preparedStatement.setString(1, book.getName());
+               preparedStatement.setString(2, book.getAuthor());
+               preparedStatement.setString(3, book.getCategory());
+               preparedStatement.setString(4,String.valueOf( book.getPrice()));
+               preparedStatement.setString(5, String.valueOf(book.getId()));
+               preparedStatement.executeUpdate();
+           }catch (SQLException e){
 
+           }
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.List;
 
 @WebServlet(name = "adminController",value = "/admin")
 @MultipartConfig(
-        location = "C:\\Users\\Admin\\IdeaProjects\\hauiProject\\src\\main\\webapp\\image1",
+        location = "C:\\module3\\demoweb\\Group11_tkw\\src\\main\\webapp\\image1",
         fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 10
 )
@@ -62,15 +62,29 @@ public class AdminController extends HttpServlet {
             case "delete":
                 delete(req,resp);
                 break;
+                case "edit":
+                    edit(req,resp);
+                    break;
         }
+    }
 
+    private void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        String author = req.getParameter("author");
+        String category = req.getParameter("category");
+        double price  = Double.valueOf(req.getParameter("price"));
+        Book book = new Book(-1,name,author,category,price);
+        bookService.edit(id,book);
+        resp.sendRedirect("http://localhost:8080/admin?action=home");
     }
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         bookService.delete(id);
+        resp.sendRedirect("http://localhost:8080/admin?action=home");
     }
-    public void addBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
+    public void addBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
         String name = req.getParameter("name");
         String author = req.getParameter("author");
         String category = req.getParameter("category");
@@ -80,9 +94,10 @@ public class AdminController extends HttpServlet {
        try {
            Part part = req.getPart("image");
            part.write(bookService.getRecently()+".png");
-           resp.sendRedirect("http://localhost:8080/admin?action=home");
+
        }catch (IOException e){
            e.printStackTrace();
        }
+        resp.sendRedirect("http://localhost:8080/admin?action=home");
     }
 }

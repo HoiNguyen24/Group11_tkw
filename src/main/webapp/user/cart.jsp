@@ -93,7 +93,7 @@
                 <ul>
                     <li><a href="">Thông tin</a></li>
                     <li><a href="#">Xem đơn hàng</a></li>
-                    <li><a href="">Đăng xuất</a></li>
+                    <li><a href="http://localhost:8080/login?aciton=login">Đăng xuất</a></li>
                 </ul>
             </div>
         </div>

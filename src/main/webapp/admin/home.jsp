@@ -103,7 +103,7 @@
       <div class="profile-options" id="profileOptions">
         <ul>
           <li><a href="">Thông tin</a></li>
-          <li><a href="">Đăng xuất</a></li>
+          <li><a href="http://localhost:8080/login?aciton=login">Đăng xuất</a></li>
         </ul>
       </div>
     </div>
@@ -119,7 +119,7 @@
         <img src="./image1/${item.image}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${item.name}</h5>
-          <p class="card-text">${item.category}</p>
+          <p class="card-text">${item.category}<i class="fa-solid fa-star"></i></p>
           <div class="row">
             <div class="col-6"></div>
             <div class="col-3">

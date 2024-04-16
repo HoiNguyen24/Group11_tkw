@@ -105,59 +105,59 @@
     <i class="left-menu-icon fas fa-solid fa-book"></i>
     <i class="left-menu-icon fas fa-solid fa-truck"></i>
 </div>
-  <div class="container gradient-custom mt-5">
-      <div class="row">
-          <div class="col-3"></div>
-          <div class="col-6">
-              <form action="http://localhost:8080/admin?action=add" method="post" enctype="multipart/form-data">
-                  <div class="d-flex flex-row align-items-center mb-4">
-                      <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="text" id="1" name="name" class="form-control" name="ac-name"/>
-                          <label class="form-label" for="1">Tên sách</label>
-                      </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                      <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="text" id="2" name="author" class="form-control" name="ac-name"/>
-                          <label class="form-label" for="2">Tác giả</label>
-                      </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                      <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <select id="3" name="category" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="width: 100%; height: 38px; margin: 0 !important;">
-                              <option selected>Loại sách</option>
-                              <option value="mn">SÁCH MẦM NON</option>
-                              <option value="tn">SÁCH THIẾU NHI</option>
-                              <option value="kn">SÁCH KĨ NĂNG</option>
-                              <option value="kd">SÁCH KINH DOANH</option>
-                              <option value="mb">SÁCH MẸ VÀ BÉ</option>
-                              <option value="vh">SÁCH VĂN HỌC</option>
-                              <option value="tk">SÁCH THAM KHẢO</option>
-                              <option value="nb">NOTEBOOK</option>
-                          </select>
-                          <label class="form-label" for="3">Loại sách</label>
-                      </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                      <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="number" id="4" name="price" class="form-control" name="ac-name"/>
-                          <label class="form-label" for="4">Giá tiền</label>
-                      </div>
-                  </div>
-                  <div class="d-flex flex-row align-items-center mb-4">
-                      <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="file" id="5" name="image" class="form-control" name="ac-name"/>
-                          <label class="form-label" for="5">Thêm ảnh</label>
-                      </div>
-                  </div>
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="submit" class="btn btn-primary btn-lg w-50">Thêm sản phẩm</button>
-                  </div>
-              </form>
-          </div>
-          <div class="col-3"></div>
-      </div>
-  </div>
+<div class="container gradient-custom mt-5">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form action="http://localhost:8080/admin?action=add" method="post" enctype="multipart/form-data">
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0" style="width: 100%">
+                        <input type="text" id="1" name="name" class="form-control" name="ac-name" value="${book.name}"/>
+                        <label class="form-label" for="1">Tên sách</label>
+                    </div>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0" style="width: 100%">
+                        <input type="text" id="2" name="author" class="form-control" name="ac-name" value="${book.author}"/>
+                        <label class="form-label" for="2">Tác giả</label>
+                    </div>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0" style="width: 100%">
+                        <select id="3" name="category" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="width: 100%; height: 38px; margin: 0 !important;">
+                            <option selected>Loại sách</option>
+                            <option value="mn">SÁCH MẦM NON</option>
+                            <option value="tn">SÁCH THIẾU NHI</option>
+                            <option value="kn">SÁCH KĨ NĂNG</option>
+                            <option value="kd">SÁCH KINH DOANH</option>
+                            <option value="mb">SÁCH MẸ VÀ BÉ</option>
+                            <option value="vh">SÁCH VĂN HỌC</option>
+                            <option value="tk">SÁCH THAM KHẢO</option>
+                            <option value="nb">NOTEBOOK</option>
+                        </select>
+                        <label class="form-label" for="3">Loại sách</label>
+                    </div>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0" style="width: 100%">
+                        <input type="number" id="4" name="price" class="form-control" name="ac-name" value="${book.price}"/>
+                        <label class="form-label" for="4">Giá tiền</label>
+                    </div>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0" style="width: 100%">
+                        <input type="file" id="5" name="image" class="form-control" name="ac-name"/>
+                        <label class="form-label" for="5">Thêm ảnh</label>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-50">Thêm sản phẩm</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
 </div>
 <script src="app.js"></script>
 <script type="text/javascript">

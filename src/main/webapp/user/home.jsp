@@ -78,7 +78,7 @@
                 <ul>
                     <li><a href="">Thông tin</a></li>
                     <li><a href="#">Xem đơn hàng</a></li>
-                    <li><a href="">Đăng xuất</a></li>
+                    <li><a href="http://localhost:8080/login?action=login">Đăng xuất</a></li>
                 </ul>
             </div>
         </div>
@@ -86,7 +86,7 @@
 </div>
 <div class="sidebar">
     <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
-    <i class="left-menu-icon fas fa-shopping-cart"></i>
+    <i class="left-menu-icon fas fa-shopping-cart"><a href="http://localhost:8080/user?aciton=cart"></a></i>
 </div>
 <div class="container">
     <div class="content-container">
@@ -104,12 +104,12 @@
                                 <div class="movie-list-item">
                                     <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
                                     <span class="movie-list-item-title">${item.name}</span>
-                                    <p class="movie-list-item-desc">${item.author} </p>
+                                    <p class="movie-list-item-desc">${item.author} ${item.review}<i class="fa-solid fa-star"></i></p>
                                     <button class="movie-list-item-button" >
                                         <a href="">Mua ngay</a>
                                     </button>
                                     <button class="movie-list-item-button" >
-                                        <a href="">Cho vào giỏ hàng</a>
+                                        <a href="http://localhost:8080/user?action=addCart&bookId=${item.id}">Cho vào giỏ hàng</a>
                                     </button>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                 <div class="movie-list-item">
                                     <img class="movie-list-item-img" src="./image/${item.image}" alt="">
                                     <span class="movie-list-item-title">${item.name}</span>
-                                    <p class="movie-list-item-desc">${item.category}</p>
+                                    <p class="movie-list-item-desc">${item.category} ${item.review}<i class="fa-solid fa-star"></i></p>
                                     <button class="movie-list-item-button">
                                         <a href="">Mua ngay</a>
                                     </button>
@@ -154,12 +154,14 @@
                                 <div class="movie-list-item">
                                     <img class="movie-list-item-img" src="./image/${item.image}" alt="">
                                     <span class="movie-list-item-title">${item.name}</span>
-                                    <p class="movie-list-item-desc">${item.category}</p>
+                                    <p class="movie-list-item-desc">${item.category} ${item.review}<i class="fa-solid fa-star"></i></p>
                                     <button class="movie-list-item-button">
-                                        <a href="">Mua ngay</a>
+                                        <a href="http://localhost:8080/user?action=showBuy">Mua ngay</a>
                                     </button>
                                     <button class="movie-list-item-button">
-                                        <a href="">Cho vào giỏ hàng</a>
+                                        <form action="http://localhost:8080/user?action=addCart" method="post">
+                                            <button >Cho vào giỏ hàng</button>
+                                        </form>
                                     </button>
                                 </div>
                             </div>
