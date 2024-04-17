@@ -103,7 +103,7 @@
       <div class="profile-options" id="profileOptions">
         <ul>
           <li><a href="">Thông tin</a></li>
-          <li><a href="http://localhost:8080/login?aciton=login">Đăng xuất</a></li>
+          <li><a href="http://localhost:8080/login?action=login">Đăng xuất</a></li>
         </ul>
       </div>
     </div>
@@ -123,9 +123,7 @@
           <div class="row">
             <div class="col-6"></div>
             <div class="col-3">
-              <form action="http://localhost:8080/admin?action=edit&id=${item.id}" method="get">
-                <button class="btn btn-primary">Sửa</button>
-              </form>
+                <button class="btn btn-primary text-white"><a href="http://localhost:8080/admin?action=edit&id=${item.id}">Sửa</a></button>
             </div>
             <div class="col-3">
               <form action="http://localhost:8080/admin?action=delete&id=${item.id}" method="post">

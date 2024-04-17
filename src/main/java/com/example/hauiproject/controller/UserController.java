@@ -33,12 +33,24 @@ public class UserController extends HttpServlet {
         }
     }
 
+    public void showDetails(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        String id = req.getParameter("id");
+        try{
+            Book book = bookService.getBook(Integer.parseInt(id));
+            req.setAttribute("book", book);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/product-details.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
     private void showCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-             String accountId =(String) req.getSession().getAttribute("accountId");
+             int accountId = (int) req.getSession().getAttribute("accountId");
              try {
-                 double price = cartService.getPrice((ArrayList<Book>)cartService.getCart(accountId));
-                 List<Book> list = cartService.getCart(accountId);
-                 req.setAttribute("totalmoney",price);
+                 double price = cartService.getPrice((ArrayList<Book>)cartService.getCart(String.valueOf(accountId)));
+                 List<Book> list = cartService.getCart(String.valueOf(accountId));
+                 req.setAttribute("totalmoney",String.valueOf(price));
                  req.setAttribute("books", list);
              }catch (SQLException e ){
 
@@ -71,12 +83,9 @@ public class UserController extends HttpServlet {
     }
 
     private void addCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String accountId = (String) req.getSession().getAttribute("accountId");
+            int accountId = (int)req.getSession().getAttribute("accountId");
             String bookId = req.getParameter("bookId");
-            try {
-                cartService.add(accountId, bookId);
-            }catch (SQLException e){
-
-            }
+            cartService.add(bookId,String.valueOf(accountId) );
+            resp.sendRedirect("http://localhost:8080/user?action=home");
     }
 }

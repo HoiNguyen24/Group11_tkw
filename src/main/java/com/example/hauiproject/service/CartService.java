@@ -12,11 +12,15 @@ import java.util.List;
 
 public class CartService {
     Connection connection = GetConnect.getConnection();
-    public void add(String bookId,String id_customer) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO Cart (id,book_id) VALUES (?,?)");
-        statement.setString(1,id_customer);
-        statement.setString(2,bookId);
-        statement.executeUpdate();
+    public void add(String bookId,String id_customer) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO Cart (id,book_id) VALUES (?,?)");
+            statement.setString(1,id_customer);
+            statement.setString(2,bookId);
+            statement.executeUpdate();
+        }catch (SQLException e){
+           e.printStackTrace();
+        }
     }
     public List<Book> getCart(String id_customer) throws SQLException {
         List<Book> list = new LinkedList<>();

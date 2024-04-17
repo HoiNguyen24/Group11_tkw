@@ -85,8 +85,8 @@
     </div>
 </div>
 <div class="sidebar">
-    <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
-    <i class="left-menu-icon fas fa-shopping-cart"><a href="http://localhost:8080/user?aciton=cart"></a></i>
+    <a href="http://localhost:8080/login?action=showHome"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
 </div>
 <div class="container">
     <div class="content-container">
@@ -99,18 +99,15 @@
             <div class="movie-list-wrapper">
                 <div class="movie-list">
                     <c:forEach var="item" items="${books1}">
-                        <form>
+                        <form action="http://localhost:8080/user?action=addCart&bookId=${item.id}" method="post">
                             <div class="movie-list">
                                 <div class="movie-list-item">
-                                    <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    <a href="http://localhost:8080/user?action=detail&id=${item.id}">
+                                        <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    </a>
                                     <span class="movie-list-item-title">${item.name}</span>
-                                    <p class="movie-list-item-desc">${item.author} ${item.review}<i class="fa-solid fa-star"></i></p>
-                                    <button class="movie-list-item-button" >
-                                        <a href="">Mua ngay</a>
-                                    </button>
-                                    <button class="movie-list-item-button" >
-                                        <a href="http://localhost:8080/user?action=addCart&bookId=${item.id}">Cho vào giỏ hàng</a>
-                                    </button>
+                                    <p class="movie-list-item-desc">${item.author}</p>
+                                    <button class="movie-list-item-button" >Cho vào giỏ hàng</button>
                                 </div>
                             </div>
                             <i class="fas fa-chevron-right arrow"></i>

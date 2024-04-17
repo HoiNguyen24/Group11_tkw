@@ -38,7 +38,22 @@ public class AdminController extends HttpServlet {
             case "add":
                 showAdd(req, resp);
                 break;
+                case "edit":
+                    showEdit(req, resp);
+                    break;
         }
+    }
+
+    private void showEdit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      try {
+        Book book = bookService.getBook(Integer.parseInt(req.getParameter("id")));
+        req.setAttribute("book",book);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("admin/edit.jsp");
+        requestDispatcher.forward(req, resp);
+      }catch (SQLException e){
+
+      }
+
     }
 
     public void showHome(HttpServletRequest req,HttpServletResponse resp) throws IOException, ServletException{

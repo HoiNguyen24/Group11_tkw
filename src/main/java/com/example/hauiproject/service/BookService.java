@@ -72,9 +72,9 @@ public class BookService implements IBookService<Book>{
         List<Book> books_list = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet books = statement.executeQuery("SELECT b.id,b.name,a.name as author,b.category,b.price from book b join author a on a.id = b.author ");
+            ResultSet books = statement.executeQuery("SELECT b.id from book b join author a on a.id = b.author ");
             while (books.next()){
-                  books_list.add(new Book(books.getInt(1),books.getString(2),books.getString(3),books.getString(4),books.getDouble(5)));
+                books_list.add(getBook(books.getInt("id")));
             }
 
         }catch (Exception e){
@@ -229,7 +229,7 @@ public class BookService implements IBookService<Book>{
                     category = "NOTEBOOK";
                     break;
             }
-            return new Book(rs.getInt("id"),rs.getString("name"),category,rs.getString("category"),rs.getDouble("price"));
+            return new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),category,rs.getDouble("price"));
         }
         else
             return null;
