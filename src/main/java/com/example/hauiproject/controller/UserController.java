@@ -30,6 +30,9 @@ public class UserController extends HttpServlet {
             case "cart":
                 showCart(req,resp);
                 break;
+            case "detail":
+                showDetails(req,resp);
+                break;
         }
     }
 
@@ -41,7 +44,7 @@ public class UserController extends HttpServlet {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/product-details.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/product-detail.jsp");
         requestDispatcher.forward(req, resp);
     }
 
@@ -50,10 +53,10 @@ public class UserController extends HttpServlet {
              try {
                  double price = cartService.getPrice((ArrayList<Book>)cartService.getCart(String.valueOf(accountId)));
                  List<Book> list = cartService.getCart(String.valueOf(accountId));
-                 req.setAttribute("totalmoney",String.valueOf(price));
+                 req.setAttribute("numbers",list.size());
                  req.setAttribute("books", list);
              }catch (SQLException e ){
-
+                  e.printStackTrace();
              }
              RequestDispatcher request = req.getRequestDispatcher("user/cart.jsp");
              request.forward(req,resp);

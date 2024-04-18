@@ -229,10 +229,13 @@ public class BookService implements IBookService<Book>{
                     category = "NOTEBOOK";
                     break;
             }
-            return new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),category,rs.getDouble("price"));
+            Book book =  new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),category,rs.getDouble("price"));
+            book.setImage(book.getId()+".png");
+            return book;
         }
         else
             return null;
+
     }
     public List<Book> search(String target) throws SQLException{
         List<Book> list = new LinkedList<>();

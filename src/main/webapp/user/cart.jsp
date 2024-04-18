@@ -116,7 +116,7 @@
                 <c:forEach items="${books}" var="item">
                     <div class="row border-top border-bottom">
                         <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="./image/${item.image}"></div>
+                            <div class="col-2"><img class="img-fluid" src="./image1/${item.image}"></div>
                             <div class="col">
                                 <div class="row text-muted">${item.name}</div>
                                 <div class="row">${item.category}</div>

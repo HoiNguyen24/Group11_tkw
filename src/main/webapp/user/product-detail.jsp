@@ -108,8 +108,7 @@
                         <div class="small mb-1">Mã sản phẩm : ${book.id}</div>
                         <h1 class="display-5 fw-bolder">${book.name}</h1>
                         <div class="fs-5 mb-5">
-                            <span class="text-decoration-line-through">${book.price}</span>
-                            <span>$40.00</span>
+                            <span>${book.price}</span>
                         </div>
                         <p class="lead">Sách thuộc thể loại ${book.category} của tác giả ${book.author}</p>
                         <div class="d-flex">

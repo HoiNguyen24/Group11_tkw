@@ -23,12 +23,13 @@ public class CartService {
         }
     }
     public List<Book> getCart(String id_customer) throws SQLException {
-        List<Book> list = new LinkedList<>();
+        List<Book> list = new ArrayList<>();
         BookService bookService = new BookService();
-        PreparedStatement statement = connection.prepareStatement("SELECT c.id_book,b.name,b.author,b.category,b.price from cart c join book b on b.id = c.book_id where c.id = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT c.book_id from cart c join book b on b.id = c.book_id where c.id = ?");
+        statement.setString(1,id_customer);
         ResultSet rs = statement.executeQuery();
         while (rs.next()) {
-            list.add(bookService.getBook(rs.getInt("id_book")));
+            list.add(bookService.getBook(rs.getInt(1)));
         }
         return list;
     }
