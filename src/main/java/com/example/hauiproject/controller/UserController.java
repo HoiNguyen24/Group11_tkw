@@ -1,9 +1,12 @@
 package com.example.hauiproject.controller;
 
 import com.example.hauiproject.model.Book;
+import com.example.hauiproject.model.BookOrder;
+import com.example.hauiproject.model.Order;
 import com.example.hauiproject.service.BookService;
 import com.example.hauiproject.service.CartService;
 import com.example.hauiproject.service.CustomerService;
+import com.example.hauiproject.service.OrderService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +24,11 @@ import java.util.List;
 public class UserController extends HttpServlet {
     BookService bookService = new BookService();
     CartService cartService = new CartService();
+    OrderService orderService = new OrderService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        System.out.println(action);
         switch (action){
             case "home":
                 showHome(req,resp);
@@ -33,8 +39,32 @@ public class UserController extends HttpServlet {
             case "detail":
                 showDetails(req,resp);
                 break;
+            case"cal":
+                calculate(req,resp);
+                break;
         }
     }
+
+    private void calculate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = (int) req.getSession().getAttribute("accountId");
+        try {
+            List<Book> list =  cartService.getCart(String.valueOf(id));
+            List<BookOrder> bookOrders = new ArrayList<BookOrder>();
+            for(int i = 0 ; i < list.size() ; i++) {
+                long quantity = Long.parseLong(req.getParameter("quantity"+String.valueOf(list.get(i).getId())));
+                bookOrders.add(new BookOrder(list.get(i),quantity));
+            }
+            double price = orderService.getPrice(bookOrders);
+            req.setAttribute("totalmoney",price);
+            String ship = req.getParameter("ship");
+            req.setAttribute("totals",price+Double.parseDouble(ship));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
+        requestDispatcher.forward(req,resp);
+    }
+
 
     public void showDetails(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         String id = req.getParameter("id");
@@ -63,6 +93,7 @@ public class UserController extends HttpServlet {
     }
 
 
+
     private void showHome(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
         List<Book> book1 = bookService.getBookByCategory("tn");
         List<Book> book2 = bookService.getBookByCategory("kd");
@@ -82,7 +113,27 @@ public class UserController extends HttpServlet {
                 case "addCart":
                     addCart(req, resp);
                     break;
+                case "order":
+                    order(req, resp);
+                    break;
             }
+    }
+    private void order(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+        int id = (int) req.getSession().getAttribute("accountId");
+        try {
+            List<Book> list =  cartService.getCart(String.valueOf(id));
+            List<BookOrder> bookOrders = new ArrayList<BookOrder>();
+            for(int i = 0 ; i < list.size() ; i++) {
+                long quantity = Long.parseLong(req.getParameter("quantity"+list.get(i).getId()));
+                bookOrders.add(new BookOrder(list.get(i),quantity));
+            }
+            double price = orderService.getPrice(bookOrders);
+            int account =  Integer.parseInt(req.getParameter("accountId"));
+            String address = req.getParameter("address");
+            orderService.add(new Order(bookOrders,String.valueOf(id),address,new Date(System.currentTimeMillis()),price));
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     private void addCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

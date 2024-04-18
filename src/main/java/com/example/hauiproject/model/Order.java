@@ -7,32 +7,58 @@ import java.util.List;
 public class Order {
     private int id;
     private List<BookOrder> books;
-    private Customer customer;
-
+    private String account;
     private String address;
     private Date date;
     private double price;
 
-    public Order(int id, List<BookOrder> books, Customer customer, Date date, double price) {
-        this.id = id;
+    public Order(List<BookOrder> books, String account, String address, Date date, double price) {
         this.books = books;
-        this.customer = customer;
-        this.date = date;
-        this.price = price;
-    }
-
-    public Order(int id, List<BookOrder> books, Customer customer, String address, Date date, double price) {
-        this.id = id;
-        this.books = books;
-        this.customer = customer;
+        this.account = account;
         this.address = address;
         this.date = date;
         this.price = price;
     }
 
+    public Order(int id, List<BookOrder> books, String account, String address, Date date, double price) {
+        this.id = id;
+        this.books = books;
+        this.account = account;
+        this.address = address;
+        this.date = date;
+        this.price = price;
+    }
+
+    public Order(int id,List<BookOrder> books, String address, Date date, double price) {
+        this.id = id;
+        this.books = books;
+        this.address = address;
+        this.date = date;
+        this.price = price;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "books=" + books +
+                ", address='" + address + '\'' +
+                ", date=" + date +
+                ", price=" + price +
+                '}';
+    }
+
     public String getAddress() {
         return address;
     }
+
 
     public void setAddress(String address) {
         this.address = address;
@@ -52,14 +78,6 @@ public class Order {
 
     public void setBooks(List<BookOrder> books) {
         this.books = books;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public Date getDate() {
