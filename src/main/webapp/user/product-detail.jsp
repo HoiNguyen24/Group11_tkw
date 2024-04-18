@@ -14,11 +14,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/user/style.css"/>">
-    <link rel="stylesheet" href="<c:url value="/user/product-detail.css"/>">
     <link
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
             rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <title>Movie Design</title>
     <style type="text/css">
         .profile-options {
@@ -122,7 +121,26 @@
                 </div>
             </div>
         </section>
-
+        <section >
+            <div class="container my-5 py-5 text-dark gradient-custom">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-11 col-lg-9 col-xl-7">
+                        <c:forEach var="item" items="${comments}">
+                            <div class="card w-100">
+                                <div class="card-body p-4">
+                                    <div class="">
+                                        <h5>${item.name}</h5>
+                                        <p>
+                                            ${item.detail}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 <script src="app.js"></script>

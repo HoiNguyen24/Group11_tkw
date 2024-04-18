@@ -8,6 +8,8 @@ public class Order {
     private int id;
     private List<BookOrder> books;
     private Customer customer;
+
+    private String address;
     private Date date;
     private double price;
 
@@ -17,6 +19,23 @@ public class Order {
         this.customer = customer;
         this.date = date;
         this.price = price;
+    }
+
+    public Order(int id, List<BookOrder> books, Customer customer, String address, Date date, double price) {
+        this.id = id;
+        this.books = books;
+        this.customer = customer;
+        this.address = address;
+        this.date = date;
+        this.price = price;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getId() {

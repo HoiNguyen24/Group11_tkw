@@ -33,7 +33,7 @@ public class OrderService {
         }
         PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM book `order` where id = ?");
         ResultSet rs2 = ps2.executeQuery();
-        return new Order (rs2.getInt("id"),books,customerService.getCustomer(rs2.getString("customer_id")),rs.getDate("date"),rs.getDouble("price"));
+        return new Order (rs2.getInt("id"),books,customerService.getCustomer(rs2.getString("customer_id")),rs.getString("address"),rs.getDate("date"),rs.getDouble("price"));
     }
     public List<Order> getOrdersCustomer(String id) throws SQLException {
         PreparedStatement order_detail = connection.prepareStatement("SELECT * from order where customer_id = ?");

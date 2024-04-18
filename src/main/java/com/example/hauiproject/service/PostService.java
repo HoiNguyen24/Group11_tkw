@@ -1,6 +1,8 @@
 package com.example.hauiproject.service;
 
+import com.example.hauiproject.model.Account;
 import com.example.hauiproject.model.Comment;
+import com.example.hauiproject.model.Customer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class PostService {
     Connection connection = GetConnect.getConnection();
+    CustomerService customerService = new CustomerService();
 
     public List<Comment> getComments(int bookId) throws SQLException {
         ArrayList<Comment> comments = new ArrayList<Comment>();
@@ -18,7 +21,13 @@ public class PostService {
         preparedStatement.setString(1,String.valueOf(bookId));
         ResultSet rs = preparedStatement.executeQuery();
         while(rs.next()) {
-            Comment comment = new Comment(rs.getString("userId"),rs.getString("content"));
+            Customer customer = customerService.getCustomer(rs.getString("userId"));
+            String name = null;
+            if(customer.getName().length()==0)
+                name ="someone";
+            else
+                name = customer.getName();
+            Comment comment = new Comment(rs.getString("userId"),name,rs.getString("content"));
             comments.add(comment);
         }
         return comments;

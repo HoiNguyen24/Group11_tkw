@@ -122,7 +122,7 @@
                                 <div class="row">${item.category}</div>
                             </div>
                             <div class="col">
-                                <input name="quantity" type="number" placeholder="Số lượng">
+                                <input name="quantity${item.id}" type="number" placeholder="Số lượng">
                             </div>
                             <div class="col">${item.price} VNĐ
                                 <form action="http://localhost:8080/user?action=deleteCart&bookId=${item.id}">
