@@ -14,13 +14,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/user/style.css"/>">
-    <link rel="stylesheet" href="<c:url value="/user/cart.css"/>">
     <link
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
             rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <title>Movie Design</title>
     <style type="text/css">
@@ -30,7 +29,7 @@
             top: 35px;
             right: 0;
             background-color: #fff;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 1;
         }
 
@@ -53,15 +52,13 @@
             background-color: #f2f2f2;
         }
 
-        .fas {
+        .fas  {
             cursor: pointer;
         }
-
-        .logo {
-            cursor: pointer;
+        .logo{
+            cursor:pointer;
         }
-
-        .profile-text {
+        .profile-text{
             cursor: pointer;
         }
 
@@ -74,11 +71,6 @@
 
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-        }
-
-        .card-book {
-            margin: 0 auto;
-            width: 60vh;
         }
     </style>
 </head>
@@ -98,69 +90,68 @@
                 <ul>
                     <li><a href="">Thông tin</a></li>
                     <li><a href="#">Xem đơn hàng</a></li>
-                    <li><a href="http://localhost:8080/login?aciton=login">Đăng xuất</a></li>
+                    <li><a href="http://localhost:8080/login?action=login">Đăng xuất</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 <div class="sidebar">
-    <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
-    <i class="left-menu-icon fas fa-shopping-cart"></i>
+    <a href="http://localhost:8080/login?action=showHome"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
 </div>
 <div class="container gradient-custom">
-    <form action="http://localhost:8080/user?action=order" method="post">
-    <div class="card" style="margin-top: 50px;">
+    <div class="container mb-4 main-container gradient-custom">
         <div class="row">
-            <div class="col-md-8 cart">
-                <div class="title">
-                    <div class="row">
-                        <div class="col"><h4><b>Giỏ hàng</b></h4></div>
-                        <div class="col align-self-center text-right text-muted">${numbers} sản phẩm</div>
-                    </div>
-                </div>
-                <c:forEach items="${books}" var="item">
-                    <div class="row border-top border-bottom">
-                        <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="./image1/${item.image}"></div>
-                            <div class="col">
-                                <div class="row text-muted">${item.name}</div>
-                                <div class="row">${item.category}</div>
-                            </div>
-                            <div class="col">
-                                <input  type="text" name="quantity${item.id}" placeholder="Số lượng" >
-                            </div>
-                            <div class="col">${item.price} VNĐ
-                                <form action="http://localhost:8080/user?action=deleteCart&bookId=${item.id}">
-                                    <button><span class="close">&#10005;</span></button>
-                                </form>
-                            </div>
+            <div class="col-lg-4 pb-5">
+                <!-- Account Sidebar-->
+                <div class="author-card pb-3">
+                    <div class="author-card-profile">
+                        <div class="author-card-details">
+                            <h5 class="author-card-name text-lg">Xin chào ${account.username}</h5>
                         </div>
                     </div>
-                </c:forEach>
-                <div class="back-to-shop"><a href="http://localhost:8080/user?action=home">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                </div>
+                <div class="wizard">
+                    <nav class="list-group list-group-flush">
+                        <a class="list-group-item active" href="#">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fa fa-shopping-bag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Danh sách sản phẩm</div>
+                                </div><span class="badge badge-secondary">${number}</span>
+                            </div>
+                        </a><a class="list-group-item" href="" target="__blank"><i class="fa fa-user text-muted"></i>Thông tin cá nhân</a>
+                    </nav>
+                </div>
             </div>
-            <div class="col-md-4 summary">
-                <div><h5><b>Thông tin</b></h5></div>
-                <hr>
-                <div class="row">
-                    <div class="col" style="padding-left:0;">${numbers} sản phẩm</div>
+            <div class="col-lg-8 pb-5">
+                <div class="d-flex justify-content-end pb-3">
                 </div>
-                <div class="row">
-                    <p>Chọn nhà vận chuyển</p>
-                    <select name="ship">
-                        <option class="text-muted" value="100000">VẬN CHUYỂN NHANH</option>
-                        <option class="text-muted" value="50000">VẬN CHUYỂN LÂU</option>
-                        <option class="text-muted" value="1000000">VẬN CHUYỂN TIẾT KIỆM</option>
-                    </select>
-                    <p>Địa chỉ</p>
-                    <input id="code" placeholder="Nhập địa chỉ" name="address">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                        <tr>
+                            <th>Mã đơn hàng #</th>
+                            <th>Ngày mua</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Tổng tiền</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="item" items="${orders}">
+                            <tr>
+                                <td><a class="navi-link" href="#order-details" data-toggle="modal">${item.id}</a></td>
+                                <td>${item.date}</td>
+                                <td><span class="badge badge-danger m-0">${item.books[0].name}</span></td>
+                                <td><span>${item.price}</span></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
-                <button class="btn" type="submit">Thanh toán</button>
             </div>
         </div>
-     </div>
-    </form>
+    </div>
 </div>
 <script src="app.js"></script>
 <script type="text/javascript">

@@ -112,13 +112,13 @@
               <form action="http://localhost:8080/admin?action=add" method="post" enctype="multipart/form-data">
                   <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="text" id="1" name="name" class="form-control" name="ac-name"/>
+                          <input type="text" id="1" name="name" class="form-control" />
                           <label class="form-label" for="1">Tên sách</label>
                       </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="text" id="2" name="author" class="form-control" name="ac-name"/>
+                          <input type="text" id="2" name="author" class="form-control" />
                           <label class="form-label" for="2">Tác giả</label>
                       </div>
                   </div>
@@ -140,13 +140,13 @@
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="number" id="4" name="price" class="form-control" name="ac-name"/>
+                          <input type="number" id="4" name="price" class="form-control" />
                           <label class="form-label" for="4">Giá tiền</label>
                       </div>
                   </div>
                   <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0" style="width: 100%">
-                          <input type="file" id="5" name="image" class="form-control" name="ac-name"/>
+                          <input type="file" id="5" name="image" class="form-control"/>
                           <label class="form-label" for="5">Thêm ảnh</label>
                       </div>
                   </div>

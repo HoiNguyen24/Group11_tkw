@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name= "HomeController",value = "/user")
@@ -48,12 +49,15 @@ public class UserController extends HttpServlet {
     private void calculate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = (int) req.getSession().getAttribute("accountId");
         try {
+            System.out.println(req.getParameter("quantity"));
             List<Book> list =  cartService.getCart(String.valueOf(id));
             List<BookOrder> bookOrders = new ArrayList<BookOrder>();
             for(int i = 0 ; i < list.size() ; i++) {
-                long quantity = Long.parseLong(req.getParameter("quantity"+String.valueOf(list.get(i).getId())));
+                long quantity  = Long.valueOf(req.getParameter("quantity"+list.get(i).getId()));
+                System.out.println(quantity);
                 bookOrders.add(new BookOrder(list.get(i),quantity));
             }
+            System.out.println("+++"+Arrays.toString(bookOrders.toArray()));
             double price = orderService.getPrice(bookOrders);
             req.setAttribute("totalmoney",price);
             String ship = req.getParameter("ship");
@@ -61,8 +65,15 @@ public class UserController extends HttpServlet {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/cart.jsp");
-        requestDispatcher.forward(req,resp);
+        try {
+            List<Book> list = cartService.getCart(String.valueOf(id));
+            req.setAttribute("numbers",list.size());
+            req.setAttribute("books", list);
+        }catch (SQLException e ){
+            e.printStackTrace();
+        }
+        RequestDispatcher request = req.getRequestDispatcher("user/cart.jsp");
+        request.forward(req,resp);
     }
 
 
@@ -128,12 +139,12 @@ public class UserController extends HttpServlet {
                 bookOrders.add(new BookOrder(list.get(i),quantity));
             }
             double price = orderService.getPrice(bookOrders);
-            int account =  Integer.parseInt(req.getParameter("accountId"));
             String address = req.getParameter("address");
             orderService.add(new Order(bookOrders,String.valueOf(id),address,new Date(System.currentTimeMillis()),price));
         }catch (SQLException e){
             e.printStackTrace();
         }
+        resp.sendRedirect("http://localhost:8080/user?action=cart");
     }
 
     private void addCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -26,7 +26,7 @@ import java.util.List;
 
 @WebServlet(name = "adminController",value = "/admin")
 @MultipartConfig(
-        location = "C:\\module3\\demoweb\\Group11_tkw\\src\\main\\webapp\\image1",
+        location = "C:\\Users\\Admin\\IdeaProjects\\hauiProject\\src\\main\\webapp\\image1",
         fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 10
 )
