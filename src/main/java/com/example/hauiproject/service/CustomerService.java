@@ -47,7 +47,20 @@ public class CustomerService {
                   PreparedStatement st = connection.prepareStatement("SELECT * from customer where id = ?");
                   st.setString(1,id);
                   ResultSet rs = st.executeQuery(); rs.next();
-                  return new Customer(rs.getInt("id"),rs.getString("name"),rs.getString(3));              }catch (SQLException e){
+                  return new Customer(rs.getInt("id"),rs.getString("name"),rs.getString(3));
+              }catch (SQLException e){
+
+              }
+              return null;
+          }
+
+          public String getUsername(String id){
+              try {
+                  PreparedStatement st = connection.prepareStatement("SELECT * from account where id = ?");
+                  st.setString(1,id);
+                  ResultSet rs = st.executeQuery(); rs.next();
+                  return  rs.getString("username");
+              }catch (SQLException e){
 
               }
               return null;
