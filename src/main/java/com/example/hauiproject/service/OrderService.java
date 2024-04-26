@@ -10,10 +10,11 @@ import java.util.List;
 public class OrderService {
     Connection connection = GetConnect.getConnection();
     public void add(Order order) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `order` (customer_id,date,price) values(?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO `order` (customer_id,date,price,address) values(?,?,?,?)");
         PreparedStatement order_detail = connection.prepareStatement("INSERT INTO order_detail (order_id,book_id,quantity) values(?,?,?)");
         preparedStatement.setString(1, order.getAccount());
         preparedStatement.setString(2, order.getDate().toString());
+        preparedStatement.setString(4, order.getAddress());
         preparedStatement.setString(3,String.valueOf(order.getPrice()));
         preparedStatement.executeUpdate();
         for (int i = 0 ; i < order.getBooks().size();i++){
@@ -51,13 +52,14 @@ public class OrderService {
         while (rs.next()) {
             books.add(new BookOrder(bookService.getBook(rs.getInt("book_id")),rs.getLong(2)));
         }
-        PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM book `order` where id = ?");
-        ResultSet rs2 = ps2.executeQuery();
-        return new Order (rs2.getInt("id"),books,rs.getString("address"),rs.getDate("date"),rs.getDouble("price"));
+        PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM `order` where id = ?");
+        ps2.setString(1, id_order);
+        ResultSet rs2 = ps2.executeQuery(); rs2.next();
+        return new Order (rs2.getInt("id"),books,rs2.getString("address"),rs2.getDate("date"),rs2.getDouble("price"));
     }
     public List<Order> getOrdersCustomer(String id) {
         try {
-            PreparedStatement order_detail = connection.prepareStatement("SELECT * from order where customer_id = ?");
+            PreparedStatement order_detail = connection.prepareStatement("SELECT * from `order` where customer_id = ?");
             order_detail.setString(1,id);
             ResultSet result = order_detail.executeQuery();
             List<Order> orders = new ArrayList<Order>();

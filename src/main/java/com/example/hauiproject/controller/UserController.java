@@ -26,6 +26,8 @@ public class UserController extends HttpServlet {
     BookService bookService = new BookService();
     CartService cartService = new CartService();
     OrderService orderService = new OrderService();
+
+    CustomerService customerService = new CustomerService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -43,7 +45,28 @@ public class UserController extends HttpServlet {
             case"cal":
                 calculate(req,resp);
                 break;
+            case "myorder":
+                showMyorder(req,resp);
+                break;
+            case "orderdetail":
+                showOrderDetail(req,resp);
+                break;
         }
+    }
+
+    private void showOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+
+    }
+
+    private void showMyorder(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+        int id = (int) req.getSession().getAttribute("accountId");
+        String name = customerService.getUsername(String.valueOf(id));
+        List<Order> orders = orderService.getOrdersCustomer(String.valueOf(id));
+        req.setAttribute("orders",orders);
+        req.setAttribute("name",name);
+        req.setAttribute("number",orders.size());
+        RequestDispatcher request = req.getRequestDispatcher("user/account-order.jsp");
+        request.forward(req,resp);
     }
 
     private void calculate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

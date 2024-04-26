@@ -108,7 +108,7 @@
                 <div class="author-card pb-3">
                     <div class="author-card-profile">
                         <div class="author-card-details">
-                            <h5 class="author-card-name text-lg">Xin chào ${account.username}</h5>
+                            <h5 class="author-card-name text-lg">Xin chào ${name}</h5>
                         </div>
                     </div>
                 </div>
@@ -133,17 +133,20 @@
                         <tr>
                             <th>Mã đơn hàng #</th>
                             <th>Ngày mua</th>
-                            <th>Tên sản phẩm</th>
+                            <th>Địa chỉ</th>
                             <th>Tổng tiền</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="item" items="${orders}">
                             <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">${item.id}</a></td>
+                                <td><a class="navi-link" href="http://localhost:8080/user?action=orderdetail&id=${item.id}" data-toggle="modal">${item.id}</a></td>
                                 <td>${item.date}</td>
-                                <td><span class="badge badge-danger m-0">${item.books[0].name}</span></td>
+                                <td><span class="badge badge-danger m-0">${item.address}</span></td>
                                 <td><span>${item.price}</span></td>
+                                <td>
+                                    <a class="btn btn-primary" href="http://localhost:8080/user?action=doComment&id=${item.id}"></a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
