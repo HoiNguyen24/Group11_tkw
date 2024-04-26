@@ -52,6 +52,9 @@ public class OrderService {
         while (rs.next()) {
             books.add(new BookOrder(bookService.getBook(rs.getInt("book_id")),rs.getLong(2)));
         }
+        for (int  i = 0 ; i < books.size();i++){
+            books.get(i).setImage(books.get(i).getId()+".png");
+        }
         PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM `order` where id = ?");
         ps2.setString(1, id_order);
         ResultSet rs2 = ps2.executeQuery(); rs2.next();

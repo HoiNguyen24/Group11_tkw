@@ -78,6 +78,37 @@
 <body class="gradient-custom">
 <div class="navbar">
     <div class="navbar-container">
+        <form method="post" action="http://localhost:8080/user?action=postComment&id=${id}" class="position-fixed d-none" style="${display}">
+            <div class="card container">
+                <div class="row">
+                    <div class="col-2">
+                        <a>${name}</a>
+                    </div>
+                    <div class="col-10">
+                        <div class="comment-box ml-2">
+                            <h4>Bình luận</h4>
+                            <div class="comment-area">
+                                <textarea class="form-control" placeholder="Đánh giá của bạn?" rows="4"></textarea>
+                            </div>
+                            <div class="comment-btns mt-2">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="pull-left">
+                                            <button class="btn btn-success btn-sm">Hủy bỏ</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="pull-right">
+                                            <button class="btn btn-success send btn-sm">Bình luận<i class="fa fa-long-arrow-right ml-1"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="logo-container">
             <h1 class="logo">Sách Dương Tâm</h1>
         </div>
@@ -89,7 +120,7 @@
             <div class="profile-options" id="profileOptions">
                 <ul>
                     <li><a href="">Thông tin</a></li>
-                    <li><a href="#">Xem đơn hàng</a></li>
+                    <li><a href="http://localhost:8080/user?action=myorder">Xem đơn hàng</a></li>
                     <li><a href="http://localhost:8080/login?action=login">Đăng xuất</a></li>
                 </ul>
             </div>
@@ -117,7 +148,7 @@
                         <a class="list-group-item active" href="#">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div><i class="fa fa-shopping-bag mr-1 text-muted"></i>
-                                    <div class="d-inline-block font-weight-medium text-uppercase">Danh sách sản phẩm</div>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Danh sách đơn hàng</div>
                                 </div><span class="badge badge-secondary">${number}</span>
                             </div>
                         </a><a class="list-group-item" href="" target="__blank"><i class="fa fa-user text-muted"></i>Thông tin cá nhân</a>
@@ -135,6 +166,7 @@
                             <th>Ngày mua</th>
                             <th>Địa chỉ</th>
                             <th>Tổng tiền</th>
+                            <th>Đánh giá</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -145,7 +177,7 @@
                                 <td><span class="badge badge-danger m-0">${item.address}</span></td>
                                 <td><span>${item.price}</span></td>
                                 <td>
-                                    <a class="btn btn-primary" href="http://localhost:8080/user?action=doComment&id=${item.id}"></a>
+                                    <a class="btn btn-primary" href="http://localhost:8080/user?action=doComment&id=${item.id}">Đánh giá</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -156,6 +188,7 @@
         </div>
     </div>
 </div>
+
 <script src="app.js"></script>
 <script type="text/javascript">
     function toggleProfileOptions() {

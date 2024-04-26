@@ -51,11 +51,38 @@ public class UserController extends HttpServlet {
             case "orderdetail":
                 showOrderDetail(req,resp);
                 break;
+            case "doComment":
+                showComment(req,resp);
+                break;
         }
     }
 
-    private void showOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+    private void showComment(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+        int id = (int) req.getSession().getAttribute("accountId");
+        String book = req.getParameter("id");
+        String name = customerService.getUsername(String.valueOf(id));
+        List<Order> orders = orderService.getOrdersCustomer(String.valueOf(id));
+        req.setAttribute("id",book);
+        req.setAttribute("orders",orders);
+        req.setAttribute("name",name);
+        req.setAttribute("number",orders.size());
+        String display = "display: block !important;";
+        req.setAttribute("display",display);
+        RequestDispatcher request = req.getRequestDispatcher("user/account-order.jsp");
+        request.forward(req,resp);
+    }
 
+    private void showOrderDetail(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
+        String id = req.getParameter("id");
+        try {
+            Order order = orderService.getOrder(id);
+            req.setAttribute("order",order);
+            req.setAttribute("numbers",order.getBooks().size());
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/order.jsp");
+            requestDispatcher.forward(req,resp);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showMyorder(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{

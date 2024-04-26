@@ -97,8 +97,8 @@
             <div class="profile-options" id="profileOptions">
                 <ul>
                     <li><a href="">Thông tin</a></li>
-                    <li><a href="#">Xem đơn hàng</a></li>
-                    <li><a href="http://localhost:8080/login?aciton=login">Đăng xuất</a></li>
+                    <li><a href="http://localhost:8080/user?action=myorder">Xem đơn hàng</a></li>
+                    <li><a href="http://localhost:8080/login?action=login">Đăng xuất</a></li>
                 </ul>
             </div>
         </div>
@@ -115,7 +115,7 @@
                 <div class="col-md-8 cart">
                     <div class="title">
                         <div class="row">
-                            <div class="col"><h4><b>Giỏ hàng</b></h4></div>
+                            <div class="col"><h4><b>Đơn hàng</b></h4></div>
                             <div class="col align-self-center text-right text-muted">${numbers} sản phẩm</div>
                         </div>
                     </div>
@@ -128,13 +128,9 @@
                                     <div class="row">${item.category}</div>
                                 </div>
                                 <div class="col">
-                                    <input  type="text" name="quantity${item.id}" placeholder="Số lượng" >
+                                    <input  type="text" name="quantity${item.id}" placeholder="Số lượng" value="${item.quantity}" readonly>
                                 </div>
-                                <div class="col">${item.price} VNĐ
-                                    <form action="http://localhost:8080/user?action=deleteCart&bookId=${item.id}">
-                                        <button><span class="close">&#10005;</span></button>
-                                    </form>
-                                </div>
+                                <div class="col">${item.price} VNĐ</div>
                             </div>
                         </div>
                     </c:forEach>
@@ -148,11 +144,11 @@
                     </div>
                     <div class="row">
                         <p>Địa chỉ</p>
-                        <input value="${order.address}">
+                        <input value="${order.address}" readonly>
                     </div>
                     <div class="row">
                         <p>Tổng tiền</p>
-                        <input value="${order.price}">
+                        <input value="${order.price} VNĐ" readonly>
                     </div>
                     <button class="btn btn-primary">
                         <a href="http://localhost:8080/user?action=review">Đánh giá</a>

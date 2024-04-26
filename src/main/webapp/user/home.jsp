@@ -85,7 +85,7 @@
     </div>
 </div>
 <div class="sidebar">
-    <a href="http://localhost:8080/login?action=showHome"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/login?action=home"><i class="left-menu-icon fas fa-home"></i></a>
     <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
 </div>
 <div class="container">
