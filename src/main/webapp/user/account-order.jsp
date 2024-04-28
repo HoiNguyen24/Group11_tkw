@@ -72,43 +72,100 @@
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
         }
+        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            padding: 20px;
+            width: 450px;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border-radius: 6px;
+            -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1)
+        }
+
+        .comment-box{
+
+            padding:5px;
+        }
+
+
+
+        .comment-area textarea{
+            resize: none;
+            border: 1px solid #ad9f9f;
+        }
+
+
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #ffffff;
+            outline: 0;
+            box-shadow: 0 0 0 1px rgb(255, 0, 0) !important;
+        }
+
+        .send {
+            color: #fff;
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+
+        .send:hover {
+            color: #fff;
+            background-color: #f50202;
+            border-color: #f50202;
+        }
+
+
+        .rating {
+            display: flex;
+            margin-top: -10px;
+            flex-direction: row-reverse;
+            margin-left: -4px;
+            float: left;
+        }
+
+        .rating>input {
+            display: none
+        }
+
+        .rating>label {
+            position: relative;
+            width: 19px;
+            font-size: 25px;
+            color: #ff0000;
+            cursor: pointer;
+        }
+
+        .rating>label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0
+        }
+
+        .rating>label:hover:before,
+        .rating>label:hover~label:before {
+            opacity: 1 !important
+        }
+
+        .rating>input:checked~label:before {
+            opacity: 1
+        }
+
+        .rating:hover>input:checked~label:before {
+            opacity: 0.4
+        }
     </style>
 </head>
 
 <body class="gradient-custom">
 <div class="navbar">
     <div class="navbar-container">
-        <form method="post" action="http://localhost:8080/user?action=postComment&id=${id}" class="position-fixed d-none" style="${display}">
-            <div class="card container">
-                <div class="row">
-                    <div class="col-2">
-                        <a>${name}</a>
-                    </div>
-                    <div class="col-10">
-                        <div class="comment-box ml-2">
-                            <h4>Bình luận</h4>
-                            <div class="comment-area">
-                                <textarea class="form-control" placeholder="Đánh giá của bạn?" rows="4"></textarea>
-                            </div>
-                            <div class="comment-btns mt-2">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="pull-left">
-                                            <button class="btn btn-success btn-sm">Hủy bỏ</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="pull-right">
-                                            <button class="btn btn-success send btn-sm">Bình luận<i class="fa fa-long-arrow-right ml-1"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
         <div class="logo-container">
             <h1 class="logo">Sách Dương Tâm</h1>
         </div>
@@ -131,6 +188,37 @@
     <a href="http://localhost:8080/login?action=showHome"><i class="left-menu-icon fas fa-home"></i></a>
     <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
 </div>
+<form method="post" action="http://localhost:8080/user?action=postComment&id=${id}" class="position-fixed d-none " style="z-index: 3; width: 200px; height: 200px; left: 500px; top: 100px; ${display}">
+    <div class="card">
+        <div class="row">
+            <div class="col-2">
+                <h5>Tên tài khoản: ${name}</h5>
+            </div>
+            <div class="col-10">
+                <div class="comment-box ml-2">
+                    <h4>Bình luận</h4>
+                    <div class="comment-area">
+                        <textarea class="form-control" placeholder="Đánh giá của bạn?" rows="4" name="comment"></textarea>
+                    </div>
+                    <div class="comment-btns mt-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="pull-left">
+                                    <a class="btn btn-danger btn-sm">Hủy bỏ</a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="pull-right">
+                                    <button class="btn btn-success send btn-sm" type="submit">Bình luận<i class="fa fa-long-arrow-right ml-1"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <div class="container gradient-custom">
     <div class="container mb-4 main-container gradient-custom">
         <div class="row">

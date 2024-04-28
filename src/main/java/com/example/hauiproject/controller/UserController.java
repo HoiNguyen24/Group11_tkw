@@ -2,11 +2,9 @@ package com.example.hauiproject.controller;
 
 import com.example.hauiproject.model.Book;
 import com.example.hauiproject.model.BookOrder;
+import com.example.hauiproject.model.Comment;
 import com.example.hauiproject.model.Order;
-import com.example.hauiproject.service.BookService;
-import com.example.hauiproject.service.CartService;
-import com.example.hauiproject.service.CustomerService;
-import com.example.hauiproject.service.OrderService;
+import com.example.hauiproject.service.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,6 +21,8 @@ import java.util.List;
 
 @WebServlet(name= "HomeController",value = "/user")
 public class UserController extends HttpServlet {
+
+    PostService postService = new PostService();
     BookService bookService = new BookService();
     CartService cartService = new CartService();
     OrderService orderService = new OrderService();
@@ -131,6 +131,8 @@ public class UserController extends HttpServlet {
         String id = req.getParameter("id");
         try{
             Book book = bookService.getBook(Integer.parseInt(id));
+            List<Comment> comments = postService.getComments(book.getId());
+            req.setAttribute("comments",comments);
             req.setAttribute("book", book);
         }catch (SQLException e){
             e.printStackTrace();
@@ -177,8 +179,28 @@ public class UserController extends HttpServlet {
                 case "order":
                     order(req, resp);
                     break;
+                case "postComment":
+                     postComment(req, resp);
+                     break;
             }
     }
+
+    private void postComment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = (int) req.getSession().getAttribute("accountId");
+        String orderId = req.getParameter("id");
+        String comment =  req.getParameter("comment");
+        try {
+            Order order = orderService.getOrder(orderId);
+            List<BookOrder> bookOrders = order.getBooks();
+            for (BookOrder bookOrd : bookOrders){
+                postService.add(new Comment(String.valueOf(bookOrd.getId()), String.valueOf(id), comment));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        resp.sendRedirect("http://localhost:8080/user?action=cart");
+    }
+
     private void order(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException {
         int id = (int) req.getSession().getAttribute("accountId");
         try {
@@ -194,7 +216,7 @@ public class UserController extends HttpServlet {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        resp.sendRedirect("http://localhost:8080/user?action=cart");
+        resp.sendRedirect("http://localhost:8080/user?action=myorder");
     }
 
     private void addCart(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -122,14 +122,16 @@
             </div>
         </section>
         <section >
-            <div class="container my-5 py-5 text-dark gradient-custom">
+            <div class="container my-5 py-5 text-dark bg-primary">
                 <div class="row d-flex justify-content-center">
+                    <h3>Bình luận</h3>
+                    <hr>
                     <div class="col-md-11 col-lg-9 col-xl-7">
                         <c:forEach var="item" items="${comments}">
-                            <div class="card w-100">
+                            <div class="card w-100 mb-1">
                                 <div class="card-body p-4">
                                     <div class="">
-                                        <h5>${item.name}</h5>
+                                        <h5>${item.account_name}</h5>
                                         <p>
                                             ${item.detail}
                                         </p>
