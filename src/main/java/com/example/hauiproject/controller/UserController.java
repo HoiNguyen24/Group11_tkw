@@ -54,7 +54,65 @@ public class UserController extends HttpServlet {
             case "doComment":
                 showComment(req,resp);
                 break;
+            case"books":
+                showBooks(req,resp);
+                break;
+            case"search":
+                search(req,resp);
+                break;
+            case"sortAsc":
+                sortAsc(req,resp);
+                break;
+            case "sortDesc":
+                sortDesc(req,resp);
+                break;
         }
+    }
+
+    public void sortAsc(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+        List<Book> books = (List<Book>) req.getSession().getAttribute("books");
+        books.sort((Book a,Book b)->{
+            if(a.getPrice() > b.getPrice())
+                return -1;
+            return 1;
+        });
+        req.setAttribute("books",books);
+        req.getSession().setAttribute("books",books);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/prodducts.jsp");
+        requestDispatcher.forward(req,resp);
+    }
+    public void sortDesc(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+        List<Book> books = (List<Book>) req.getSession().getAttribute("books");
+        books.sort((Book a,Book b)->{
+            if(a.getPrice() > b.getPrice())
+                return 1;
+            return -1;
+        });
+        req.setAttribute("books",books);
+        req.getSession().setAttribute("books",books);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/prodducts.jsp");
+        requestDispatcher.forward(req,resp);
+    }
+    private void search(HttpServletRequest req, HttpServletResponse resp)throws ServletException,IOException {
+           String name = req.getParameter("search_text");
+
+           String category = req.getParameter("category");
+          System.out.println(name);
+           System.out.println(category);
+           List<Book> books = bookService.search(name,category);
+           System.out.println(books);
+           req.setAttribute("books",books);
+           req.getSession().setAttribute("books",books);
+           RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/prodducts.jsp");
+           requestDispatcher.forward(req,resp);
+    }
+
+    private void showBooks(HttpServletRequest req, HttpServletResponse resp)throws ServletException,IOException {
+        List<Book> books = bookService.findall();
+        req.setAttribute("books",books);
+        req.getSession().setAttribute("books",books);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/prodducts.jsp");
+        requestDispatcher.forward(req,resp);
     }
 
     private void showComment(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{

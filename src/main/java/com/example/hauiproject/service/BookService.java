@@ -90,7 +90,23 @@ public class BookService implements IBookService<Book>{
         }
         return books_list;
     }
-
+    public List<Book> search(String name,String category){
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT id from book where (name like ? or author like ? ) and category like ? ");
+            ps.setString(1,"%"+name+"%");
+            ps.setString(3,"%"+category+"%");
+            ps.setString(2,"%"+name+"%");
+            ResultSet rs  = ps.executeQuery();
+            List<Book> books = new LinkedList<>();
+            while (rs.next()){
+                books.add(getBook(rs.getInt(1)));
+            }
+            return books;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public void edit(int index, Book book) {
            try {
@@ -198,7 +214,7 @@ public class BookService implements IBookService<Book>{
         return null;
     }
     public Book getBook(int id) throws SQLException{
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM book where id = ?");
+        PreparedStatement ps = connection.prepareStatement("SELECT b.id,b.name,a.author,b.category,b.price FROM book b join author a on a.id = b.author where b.id = ?");
         ps.setString(1,String.valueOf(id));
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
@@ -229,7 +245,7 @@ public class BookService implements IBookService<Book>{
                     category = "NOTEBOOK";
                     break;
             }
-            Book book =  new Book(rs.getInt("id"),rs.getString("name"),rs.getString("author"),category,rs.getDouble("price"));
+            Book book =  new Book(rs.getInt(1),rs.getString(2),rs.getString(3),category,rs.getDouble(4));
             book.setImage(book.getId()+".png");
             return book;
         }
