@@ -93,63 +93,60 @@
     </div>
 </div>
 <div class="sidebar">
-    <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
-    <i class="left-menu-icon fas fa-shopping-cart"></i>
+    <a href="http://localhost:8080/login?action=showHome"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/login?action=books"><i class="left-menu-icon fa-solid fa-book"></i></a>
 </div>
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-2 bg-primary p-5">
-                <form class="form-inline">
-                    <div class="row flex-nowrap">
-                        <input class="form-control w-75" type="search" placeholder="Search" aria-label="Tìm kiếm">
-                        <button class="btn btn-success w-25" type="submit">Tìm kiếm</button>
-                    </div>
-                    <div class="row">
-                        <label>Phân loại</label>
-                        <select name="category" class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" style="width: 100%; height: 38px; margin: 0 !important;">
-                            <option selected>Loại sách</option>
-                            <option value="mn"><button>SÁCH MẦM NON</button></option>
-                            <option value="tn"><button>SÁCH THIẾU NHI</button></option>
-                            <option value="kn"><button>SÁCH KĨ NĂNG</button></option>
-                            <option value="kd"><button>SÁCH KINH DOANH</button></option>
-                            <option value="mb"><button>SÁCH MẸ VÀ BÉ</button></option>
-                            <option value="vh"><button>SÁCH VĂN HỌC</button></option>
-                            <option value="tk"><button>SÁCH THAM KHẢO</button></option>
-                            <option value="nb"><button>NOTEBOOK</button></option>
-                        </select>
-                    </div>
-                </form>
-        </div>
-        <div class="col-9">
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-2 bg-primary p-5" style="height: 250px !important;">
+        <form action="http://localhost:8080/user?action=search" method="get">
+            <input value="search" name="action"style="display: none">
+            <div class="row flex-nowrap">
+                <input class="form-control w-75" name="search_text" placeholder="Search" aria-label="Tìm kiếm theo tên">
+            </div>
             <div class="row">
-                <select class="form-select form-select-lg mb-3 ">
-                    <option selected>Chọn sắp xếp</option>
-                    <option><a href="http://localhost:8080/user?action=sortDesc">Sắp thoe giá tiền tăng dần</a></option>
-                    <option><a href="http://localhost:8080/user?action=sortAsc">Sắp theo giá tiền giảm</a></option>
+                <label>Phân loại</label>
+                <select name="category" class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" style="width: 100%; height: 38px; margin: 0 !important;">
+                    <option value="" selected>Chọn loại sách</option>
+                    <option value="mn">SÁCH MẦM NON</option>
+                    <option value="tn">SÁCH THIẾU NHI</option>
+                    <option value="kn">SÁCH KĨ NĂNG</option>
+                    <option value="kd">SÁCH KINH DOANH</option>
+                    <option value="mb">SÁCH MẸ VÀ BÉ</option>
+                    <option value="vh">SÁCH VĂN HỌC</option>
+                    <option value="tk">SÁCH THAM KHẢO</option>
+                    <option value="nb">NOTEBOOK</option>
                 </select>
             </div>
-            <div class="row">
-                <c:forEach var="item" items="${books}">
-                    <form>
-                        <div class="movie-list">
-                            <div class="movie-list-item">
-                                <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
-                                <span class="movie-list-item-title">${item.name}</span>
-                                <p class="movie-list-item-desc">${item.author} </p>
-                                <button class="movie-list-item-button" >
-                                    <a href="">Mua ngay</a>
-                                </button>
-                                <button class="movie-list-item-button" >
-                                    <a href="">Cho vào giỏ hàng</a>
-                                </button>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </form>
-                </c:forEach>
+            <div class="row mt-1">
+                <button class="btn btn-success" type="submit">Tìm kiếm</button>
             </div>
+        </form>
+    </div>
+    <div class="col-9 ml-5">
+        <div class="row flex-nowrap">
+            <a class="btn btn-primary w-25" href="http://localhost:8080/user?action=sortDesc">Sắp xếp theo chiều tăng</a>
+            <a class="btn btn-primary w-25" href="http://localhost:8080/user?action=sortAsc">Sắp xếp theo chiều giảm</a>
+        </div>
+        <div class="row d-flex flex-wrap">
+            <c:forEach var="item" items="${books}">
+                <form action="" method="post">
+                    <div class="movie-list">
+                        <div class="movie-list-item">
+                            <a href="http://localhost:8080/user?action=detail&id=${item.id}">
+                                <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                            </a>
+                            <span class="movie-list-item-title">${item.name}</span>
+                            <p class="movie-list-item-desc">${item.author}</p>
+                            <button class="movie-list-item-button" >Cho vào giỏ hàng</button>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right arrow"></i>
+                </form>
+            </c:forEach>
         </div>
     </div>
+</div>
 <script src="app.js"></script>
 <script type="text/javascript">
     function toggleProfileOptions() {

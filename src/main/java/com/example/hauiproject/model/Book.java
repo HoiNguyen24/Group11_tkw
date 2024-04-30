@@ -9,6 +9,7 @@ public class Book {
     private double reviewscore;
 
     private String image;
+
     public Book(int id, String name, String author, String category, double price) {
         this.id = id;
         this.name = name;

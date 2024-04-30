@@ -95,8 +95,9 @@
     </div>
 </div>
 <div class="sidebar">
-    <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
-    <i class="left-menu-icon fas fa-shopping-cart"></i>
+    <a href="http://localhost:8080/user?action=home"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
+    <a href="http://localhost:8080/user?action=books"><i class="left-menu-icon fa-solid fa-book"></i></a>
 </div>
     <div class="row">
         <div class="col-1"></div>
@@ -132,20 +133,18 @@
             </div>
             <div class="row d-flex flex-wrap">
                 <c:forEach var="item" items="${books}">
-                    <form class="w-25">
+                    <form action="http://localhost:8080/user?action=addCart&bookId=${item.id}" method="post">
                         <div class="movie-list">
                             <div class="movie-list-item">
-                                <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                <a href="http://localhost:8080/user?action=detail&id=${item.id}">
+                                    <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                </a>
                                 <span class="movie-list-item-title">${item.name}</span>
-                                <p class="movie-list-item-desc">${item.author} </p>
-                                <button class="movie-list-item-button" >
-                                    <a href="">Mua ngay</a>
-                                </button>
-                                <button class="movie-list-item-button" >
-                                    <a href="">Cho vào giỏ hàng</a>
-                                </button>
+                                <p class="movie-list-item-desc">${item.author}</p>
+                                <button class="movie-list-item-button" >Cho vào giỏ hàng</button>
                             </div>
                         </div>
+                        <i class="fas fa-chevron-right arrow"></i>
                     </form>
                 </c:forEach>
             </div>

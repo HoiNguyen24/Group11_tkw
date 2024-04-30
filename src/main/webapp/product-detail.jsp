@@ -85,18 +85,15 @@
             </div>
             <div class="profile-options" id="profileOptions">
                 <ul>
-                    <li><a href="">Thông tin</a></li>
-                    <li><a href="http://localhost:8080/user?action=myorder">Xem đơn hàng</a></li>
-                    <li><a href="http://localhost:8080/login?action=login">Đăng xuất</a></li>
+                    <li><a href="http://localhost:8080/login?action=login">Đăng nhập</a></li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 <div class="sidebar">
-    <a href="http://localhost:8080/user?action=home"><i class="left-menu-icon fas fa-home"></i></a>
-    <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
-    <a href="http://localhost:8080/user?action=books"><i class="left-menu-icon fa-solid fa-book"></i></a>
+    <a href="http://localhost:8080/login?action=home"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/login?action=books"><i class="left-menu-icon fa-solid fa-book"></i></a>
 </div>
 <div class="container gradient-custom">
     <div class="content-container">

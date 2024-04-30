@@ -105,8 +105,9 @@
     </div>
 </div>
 <div class="sidebar">
-    <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
-    <i class="left-menu-icon fas fa-shopping-cart"></i>
+    <a href="http://localhost:8080/user?action=home"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
+    <a href="http://localhost:8080/user?action=books"><i class="left-menu-icon fa-solid fa-book"></i></a>
 </div>
 <div class="container gradient-custom">
     <form action="http://localhost:8080/user?action=order" method="post">

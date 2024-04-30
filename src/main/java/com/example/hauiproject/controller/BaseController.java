@@ -1,7 +1,9 @@
 package com.example.hauiproject.controller;
 
 import com.example.hauiproject.model.Account;
+import com.example.hauiproject.model.Book;
 import com.example.hauiproject.model.Order;
+import com.example.hauiproject.service.BookService;
 import com.example.hauiproject.service.CustomerService;
 import com.example.hauiproject.service.OrderService;
 import com.sun.org.apache.xpath.internal.operations.Or;
@@ -21,6 +23,8 @@ import java.util.List;
 public class BaseController extends HttpServlet {
     CustomerService customerService = new CustomerService();
     OrderService orderService = new OrderService();
+
+    BookService bookService = new BookService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -34,22 +38,67 @@ public class BaseController extends HttpServlet {
             case "showHome":
                 showHome(req, resp);
                 break;
-            case "myorder":
-                showMyOrder(req,resp);
+            case"books":
+                showBooks(req,resp);
+                break;
+            case "search":
+                search(req,resp);
+                break;
+            case"sortDesc":
+                sortDesc(req,resp);
+                break;
+            case"sortAsc":
+                sortAsc(req,resp);
                 break;
         }
     }
 
-    private void showMyOrder(HttpServletRequest req, HttpServletResponse resp)throws ServletException,IOException {
-        int accountId = (int) req.getSession().getAttribute("accountId");
-        String account = customerService.getUsername(String.valueOf(accountId));
-        List<Order> orders = orderService.getOrdersCustomer(String.valueOf(accountId));
-        req.setAttribute("orders",orders);
-        req.setAttribute("account",account);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/account-order.jsp");
+    public void sortAsc(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+        List<Book> books = (List<Book>) req.getSession().getAttribute("books");
+        books.sort((Book a,Book b)->{
+            if(a.getPrice() > b.getPrice())
+                return -1;
+            return 1;
+        });
+        req.setAttribute("books",books);
+        req.getSession().setAttribute("books",books);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("prodducts.jsp");
         requestDispatcher.forward(req,resp);
-
     }
+    public void sortDesc(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
+        List<Book> books = (List<Book>) req.getSession().getAttribute("books");
+        books.sort((Book a,Book b)->{
+            if(a.getPrice() > b.getPrice())
+                return 1;
+            return -1;
+        });
+        req.setAttribute("books",books);
+        req.getSession().setAttribute("books",books);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("prodducts.jsp");
+        requestDispatcher.forward(req,resp);
+    }
+    private void search(HttpServletRequest req, HttpServletResponse resp)throws ServletException,IOException {
+        String name = req.getParameter("search_text");
+
+        String category = req.getParameter("category");
+        System.out.println(name);
+        System.out.println(category);
+        List<Book> books = bookService.search(name,category);
+        System.out.println(books);
+        req.setAttribute("books",books);
+        req.getSession().setAttribute("books",books);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("prodducts.jsp");
+        requestDispatcher.forward(req,resp);
+    }
+
+    private void showBooks(HttpServletRequest req, HttpServletResponse resp)throws ServletException,IOException {
+        List<Book> books = bookService.findall();
+        req.setAttribute("books",books);
+        req.getSession().setAttribute("books",books);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("prodducts.jsp");
+        requestDispatcher.forward(req,resp);
+    }
+
 
     public void showLogin(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
@@ -61,7 +110,7 @@ public class BaseController extends HttpServlet {
     }
 
     public void showHome(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("home.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(req,resp);
     }
     @Override

@@ -214,7 +214,7 @@ public class BookService implements IBookService<Book>{
         return null;
     }
     public Book getBook(int id) throws SQLException{
-        PreparedStatement ps = connection.prepareStatement("SELECT b.id,b.name,a.author,b.category,b.price FROM book b join author a on a.id = b.author where b.id = ?");
+        PreparedStatement ps = connection.prepareStatement("SELECT b.id,b.name,a.name,b.category,b.price FROM book b join author a on a.id = b.author where b.id = ?");
         ps.setString(1,String.valueOf(id));
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
@@ -245,7 +245,7 @@ public class BookService implements IBookService<Book>{
                     category = "NOTEBOOK";
                     break;
             }
-            Book book =  new Book(rs.getInt(1),rs.getString(2),rs.getString(3),category,rs.getDouble(4));
+            Book book = new Book(rs.getInt(1),rs.getString(2),rs.getString(3),category,rs.getDouble(5));
             book.setImage(book.getId()+".png");
             return book;
         }

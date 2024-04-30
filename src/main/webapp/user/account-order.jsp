@@ -185,8 +185,9 @@
     </div>
 </div>
 <div class="sidebar">
-    <a href="http://localhost:8080/login?action=showHome"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/user?action=home"><i class="left-menu-icon fas fa-home"></i></a>
     <a href="http://localhost:8080/user?action=cart"><i class="left-menu-icon fas fa-shopping-cart"></i></a>
+    <a href="http://localhost:8080/user?action=books"><i class="left-menu-icon fa-solid fa-book"></i></a>
 </div>
 <form method="post" action="http://localhost:8080/user?action=postComment&id=${id}" class="position-fixed d-none " style="z-index: 3; width: 200px; height: 200px; left: 500px; top: 100px; ${display}">
     <div class="card">

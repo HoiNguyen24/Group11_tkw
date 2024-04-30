@@ -83,8 +83,8 @@
     </div>
 </div>
 <div class="sidebar">
-    <i class="left-menu-icon fas fa-home"><a href="http://localhost:8080/login?action=showHome"></a></i>
-    <i class="left-menu-icon fas fa-shopping-cart"></i>
+    <a href="http://localhost:8080/login?action=home"><i class="left-menu-icon fas fa-home"></i></a>
+    <a href="http://localhost:8080/login?action=books"><i class="left-menu-icon fa-solid fa-book"></i></a>
 </div>
 <div class="container">
     <div class="content-container">
@@ -100,7 +100,9 @@
                         <form>
                             <div class="movie-list">
                                 <div class="movie-list-item">
-                                    <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    <a href="http://localhost:8080/user?action=detail&id=${item.id}">
+                                        <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    </a>
                                     <span class="movie-list-item-title">${item.name}</span>
                                     <p class="movie-list-item-desc">${item.author} </p>
                                     <button class="movie-list-item-button" >
@@ -125,7 +127,9 @@
                         <form>
                             <div class="movie-list">
                                 <div class="movie-list-item">
-                                    <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    <a href="http://localhost:8080/user?action=detail&id=${item.id}">
+                                        <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    </a>
                                     <span class="movie-list-item-title">${item.name}</span>
                                     <p class="movie-list-item-desc">${item.category}</p>
                                     <button class="movie-list-item-button">
@@ -150,7 +154,9 @@
                         <form>
                             <div class="movie-list">
                                 <div class="movie-list-item">
-                                    <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    <a href="http://localhost:8080/user?action=detail&id=${item.id}">
+                                        <img class="movie-list-item-img" src="./image1/${item.image}" alt="">
+                                    </a>
                                     <span class="movie-list-item-title">${item.name}</span>
                                     <p class="movie-list-item-desc">${item.category}</p>
                                     <button class="movie-list-item-button">
