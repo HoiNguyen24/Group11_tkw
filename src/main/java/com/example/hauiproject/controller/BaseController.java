@@ -50,7 +50,17 @@ public class BaseController extends HttpServlet {
             case"sortAsc":
                 sortAsc(req,resp);
                 break;
+            case"cart":
+                showCar(req,resp);
+
         }
+    }
+
+    private void showCar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Book> books= (List<Book>) req.getSession().getAttribute("cart");
+        req.setAttribute("books",books);
+        RequestDispatcher requestDispatcher=req.getRequestDispatcher("cart.jsp");
+        requestDispatcher.forward(req,resp);
     }
 
     public void sortAsc(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{

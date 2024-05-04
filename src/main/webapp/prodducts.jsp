@@ -130,7 +130,7 @@
         </div>
         <div class="row d-flex flex-wrap">
             <c:forEach var="item" items="${books}">
-                <form action="" method="post">
+                <form action="http://localhost:8080/user?action=addCart&bookId=${item.id}" method="post" style="width: 25%">
                     <div class="movie-list">
                         <div class="movie-list-item">
                             <a href="http://localhost:8080/user?action=detail&id=${item.id}">

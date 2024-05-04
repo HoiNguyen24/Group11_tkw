@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 @WebServlet(name = "load",value = "")
@@ -20,6 +21,8 @@ public class LoadWeb extends HttpServlet {
         List<Book> book1 = bookService.getBookByCategory("tn");
         List<Book> book2 = bookService.getBookByCategory("kd");
         List<Book> book3 = bookService.getBookByCategory("tk");
+        List<Book> cart = new LinkedList<>();
+        req.getSession().setAttribute("cart",cart);
         req.setAttribute("books1",book1);
         req.setAttribute("books2",book2);
         req.setAttribute("books3",book3);

@@ -97,7 +97,7 @@ public class UserController extends HttpServlet {
            String name = req.getParameter("search_text");
 
            String category = req.getParameter("category");
-          System.out.println(name);
+           System.out.println(name);
            System.out.println(category);
            List<Book> books = bookService.search(name,category);
            System.out.println(books);
