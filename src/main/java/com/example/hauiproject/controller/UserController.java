@@ -222,7 +222,6 @@ public class UserController extends HttpServlet {
         req.setAttribute("books1",book1);
         req.setAttribute("books2",book2);
         req.setAttribute("books3",book3);
-        System.out.println(book1);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("user/home.jsp");
         requestDispatcher.forward(req,resp);
     }
